@@ -206,7 +206,7 @@
                     html += '</select>';
                     $('#product_list_dropdown').html(html);
                 }
-// akshsay
+
             });
         }
 
