@@ -1,0 +1,172 @@
+/*
+SQLyog Ultimate v9.10 
+MySQL - 5.5.5-10.1.21-MariaDB : Database - fyp_project
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`fyp_project` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `fyp_project`;
+
+/*Table structure for table `customer` */
+
+DROP TABLE IF EXISTS `customer`;
+
+CREATE TABLE `customer` (
+  `customer_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `customer_name` VARCHAR(25) NOT NULL,
+  `username` VARCHAR(25) NOT NULL,
+  `password` VARCHAR(50) NOT NULL,
+  `customer_email` VARCHAR(50) NOT NULL,
+  `application_id` int(11) DEFAULT NULL,
+  `security_code` varchar(25) NOT NULL,
+  `dateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`customer_id`),
+  UNIQUE KEY `username` (`username`,`customer_email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+/*Data for the table `customer` */
+
+insert  into `customer`(`customer_id`,`customer_name`,`username`,`password`,`customer_email`,`application_id`,`security_code`,`dateTime`) values (1,'vishal','vishalmandhan','alskdfj','vishalmandhan11@yahoo.com',0,'654','2018-11-12 23:44:08');
+
+/*Table structure for table `customer_notified` */
+
+DROP TABLE IF EXISTS `customer_notified`;
+
+CREATE TABLE `customer_notified` (
+  `customer_notified_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fk_customer_id` int(11) NOT NULL,
+  `fk_promotion_id` int(11) NOT NULL,
+  PRIMARY KEY (`customer_notified_id`),
+  KEY `fk_customer_id` (`fk_customer_id`),
+  KEY `fk_promotion_id` (`fk_promotion_id`),
+  CONSTRAINT `customer_notified_ibfk_1` FOREIGN KEY (`fk_customer_id`) REFERENCES `customer` (`customer_id`),
+  CONSTRAINT `customer_notified_ibfk_2` FOREIGN KEY (`fk_promotion_id`) REFERENCES `promotion` (`promotion_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `customer_notified` */
+
+/*Table structure for table `customer_subscribe` */
+
+DROP TABLE IF EXISTS `customer_subscribe`;
+
+CREATE TABLE `customer_subscribe` (
+  `customer_subscribe_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `fk_shop_id` int(11) NOT NULL,
+  `fk_customer_id` int(11) NOT NULL,
+  PRIMARY KEY (`customer_subscribe_id`),
+  KEY `fk_shop_id` (`fk_shop_id`),
+  KEY `fk_customer_id` (`fk_customer_id`),
+  CONSTRAINT `customer_subscribe_ibfk_1` FOREIGN KEY (`fk_shop_id`) REFERENCES `shop` (`shop_id`),
+  CONSTRAINT `customer_subscribe_ibfk_2` FOREIGN KEY (`fk_customer_id`) REFERENCES `customer` (`customer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `customer_subscribe` */
+
+/*Table structure for table `product` */
+
+DROP TABLE IF EXISTS `product`;
+
+CREATE TABLE `product` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_name` varchar(50) NOT NULL,
+  `product_description` varchar(50) NOT NULL,
+  `product_price` int(11) NOT NULL,
+  `product_image` varchar(50) DEFAULT NULL,
+  `fk_shop_id` int(11) NOT NULL,
+  PRIMARY KEY (`product_id`),
+  KEY `fk_shop_id` (`fk_shop_id`),
+  CONSTRAINT `product_ibfk_1` FOREIGN KEY (`fk_shop_id`) REFERENCES `shop` (`shop_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `product` */
+
+/*Table structure for table `promotion` */
+
+DROP TABLE IF EXISTS `promotion`;
+
+CREATE TABLE `promotion` (
+  `promotion_id` int(11) NOT NULL AUTO_INCREMENT,
+  `promotion_description` varchar(50) NOT NULL,
+  `startDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `endDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` tinyint(1) DEFAULT '1',
+  `fk_product_id` int(11) NOT NULL,
+  PRIMARY KEY (`promotion_id`),
+  KEY `fk_product_id` (`fk_product_id`),
+  CONSTRAINT `promotion_ibfk_1` FOREIGN KEY (`fk_product_id`) REFERENCES `product` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `promotion` */
+
+/*Table structure for table `shop` */
+
+DROP TABLE IF EXISTS `shop`;
+
+CREATE TABLE `shop` (
+  `shop_id` int(11) NOT NULL AUTO_INCREMENT,
+  `shop_name` varchar(25) NOT NULL,
+  `shop_address` varchar(50) NOT NULL,
+  `city` varchar(25) DEFAULT NULL,
+  `country` varchar(25) DEFAULT NULL,
+  `map_location` varchar(50) NOT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  `fk_user_id` int(11) NOT NULL,
+  PRIMARY KEY (`shop_id`),
+  KEY `fk_user_id` (`fk_user_id`),
+  CONSTRAINT `shop_ibfk_1` FOREIGN KEY (`fk_user_id`) REFERENCES `users` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `shop` */
+
+/*Table structure for table `user_type` */
+
+DROP TABLE IF EXISTS `user_type`;
+
+CREATE TABLE `user_type` (
+  `user_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_type` varchar(15) NOT NULL,
+  PRIMARY KEY (`user_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `user_type` */
+
+insert  into `user_type`(`user_type_id`,`user_type`) values (1,'Admin'),(2,'Manager'),(3,'Customer');
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(200) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `user_email` varchar(200) NOT NULL,
+  `security_code` varchar(25) DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  `fk_user_type_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`username`,`user_email`),
+  KEY `fk_user_type_id` (`fk_user_type_id`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`fk_user_type_id`) REFERENCES `user_type` (`user_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+/*Data for the table `users` */
+
+insert  into `users`(`user_id`,`user_name`,`username`,`password`,`user_email`,`security_code`,`is_active`,`fk_user_type_id`) values (1,'akshay','akshay2good','62ef34f4e7b271b4ccdb5cbeb1546fd5','akshaymandhan1996@gmail.com','2156788',1,1),(2,'aakash','aakash2good','62ef34f4e7b271b4ccdb5cbeb1546fd5','akashmatlani@gmail.com','7300782',1,1),(13,'Azmat Hafeez','HazmatHafeez','62ef34f4e7b271b4ccdb5cbeb1546fd5','Azmat.hafeez@gmail.com','123456',1,2),(16,'vishal','vishal2good','62ef34f4e7b271b4ccdb5cbeb1546fd5','vishalmandhan11@yahoo.com','vishal123',1,1),(17,'sir Khuwaja','khuwaja','62ef34f4e7b271b4ccdb5cbeb1546fd5','khuwaja@gmail.com','123456',1,2),(18,'vishal','vishal2good','62ef34f4e7b271b4ccdb5cbeb1546fd5','vishal1992@gmail.com','2154468',1,1),(19,'aroon','aroon2good','62ef34f4e7b271b4ccdb5cbeb1546fd5','arun1606@aptech.com.pk','3151203',1,2),(20,'assss','ssssss','62ef34f4e7b271b4ccdb5cbeb1546fd5','vishalmandhan112@yahoo.coma',NULL,1,1),(21,'Akshay Mandhan','akjklsjdlfj','62ef34f4e7b271b4ccdb5cbeb1546fd5','vishalmandhan112@yahoo.comas',NULL,0,2),(22,'asssdd','asdddd','62ef34f4e7b271b4ccdb5cbeb1546fd5','akshaymandhan1996@gmail.comsss',NULL,1,3),(24,'Azmat Hafeez Shaikh','AzmatHafeeza','62ef34f4e7b271b4ccdb5cbeb1546fd5','vishalmandhan112@yahoo.com3',NULL,1,3),(26,'Akshay Mandhan','akjklsjdlfjs','62ef34f4e7b271b4ccdb5cbeb1546fd5','vishalmandhan112@yahoo.comass',NULL,1,1),(27,'Akshay Mandhan','AzmatHafeez','62ef34f4e7b271b4ccdb5cbeb1546fd5','Azmat.hafeez@gmail.com',NULL,1,2),(31,'shiwam Kingrani','shiwam kingrani','62ef34f4e7b271b4ccdb5cbeb1546fd5','shiwamkingani@gmail.com',NULL,1,1),(32,'rohit','rohitkumar','62ef34f4e7b271b4ccdb5cbeb1546fd5','rohit@gmail.com',NULL,1,1);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
