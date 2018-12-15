@@ -22,11 +22,11 @@
             <table class="table table-striped" id="mydata">
                 <thead>
                 <tr>
+                    <th width="80">Image</th>
                     <th width="120">Product Name</th>
-                    <th width="230">Description</th>
-                    <th width="90">Price</th>
-                    <th width="100">Image</th>
-                    <th width="130">Shop Name</th>
+                    <th width="280">Description</th>
+                    <th width="70">Price</th>
+                    <th width="100">Shop Name</th>
                     <th style="text-align: right;">Actions</th>
                 </tr>
                 </thead>
@@ -51,6 +51,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
+
+                    <div class="form-group row">
+                        <label for="image" class="col-md-2 col-form-label">Upload Image</label>
+                        <div class="col-sm-10">
+                            <input type="file" class="form-control" name="product_image">
+                            <div id="product_image"></div>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Product Name</label>
                         <div class="col-md-10">
@@ -68,15 +76,6 @@
                         <label class="col-md-2 col-form-label">Product Price</label>
                         <div class="col-md-10">
                             <input type="text" name="product_price_edit" id="product_price_edit" class="form-control" placeholder="Product Price">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="image" class="col-md-2 col-form-label">Upload Image</label>
-                        <div class="col-sm-10">
-                            <input type="file" class="form-control" name="product_image">
-
-                            <div id="product_image"></div>
                         </div>
                     </div>
 
@@ -169,10 +168,10 @@
                     var i;
                     for(i=0; i<data.length; i++){
                         html += '<tr>'+
+                            '<td><img src="<?php echo base_url() ?>assets/product_images/'+data[i].product_image+'" width="70px"/></td>'+
                             '<td>'+data[i].product_name+'</td>'+
                             '<td>'+data[i].product_description+'</td>'+
                             '<td>'+data[i].product_price+'</td>'+
-                            '<td>'+data[i].product_image+'</td>'+
                             '<td>'+data[i].shop_name+'</td>'+
                             '<td style="text-align:right;">'+
                             '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-product_id="'+data[i].product_id+'" data-product_name="'+data[i].product_name+'" data-product_description="'+data[i].product_description+'" data-product_price="'+data[i].product_price+'" data-product_image="'+data[i].product_image+'" data-shop_id="'+data[i].shop_id+'">Edit</a>'+' '+

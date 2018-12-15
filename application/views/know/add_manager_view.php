@@ -69,7 +69,6 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="status" class="col-sm-3 text-right control-label col-form-label">Status</label>
                         <div class="checkbox">
@@ -79,10 +78,11 @@
                 </div>
                 <div class="border-top">
                     <div class="card-body">
+                        <button type="submit" name="btn_submit" class="btn btn-success">Submit</button>
                         <a href="<?php echo site_url(); ?>/dashboard_cont/dashboard">
                             <button type="button" name="btn_cancel" class="btn btn-default">Cancel</button>
                         </a>
-                        <button type="submit" name="btn_submit" class="btn btn-success">Submit</button>
+
                     </div>
                 </div>
                 <!-- </form> -->

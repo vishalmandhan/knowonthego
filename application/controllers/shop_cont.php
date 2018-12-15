@@ -15,10 +15,6 @@ class shop_cont extends CI_Controller {
     ============================================================== */
     public function add_shop()
     {
-        if (isset($_SESSION['user_login_data']) && !$_SESSION['user_login_data']['is_admin']) {
-            redirect(site_url() . '/dashboard_cont/dashboard');
-        }
-
         if ($_POST) {
             // validations first name is comes from the form name not db names
             $this->form_validation->set_rules('shop_name', 'Shop Name', 'trim|required|min_length[3]');

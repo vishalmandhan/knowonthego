@@ -6,11 +6,10 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                     <form class="form-horizontal" method="post">
+                    <?php echo form_open_multipart('product_cont/add_product', 'class="form-horizontal"')?>
                         <div class="card-body">
                             <h4 class="card-title">Add Product Details</h4>
                              <div class="form-group row">
-<!--                                <label for="product_id" class="col-sm-3 text-right control-label col-form-label">Id</label>-->
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" placeholder="Product Id" name="product_id" hidden>
                                 </div>
@@ -40,25 +39,26 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="select_shop" class="col-sm-3 text-right control-label col-form-label">Select Shop</label>
+                                <label for="select shop" class="col-sm-3 text-right control-label col-form-label">Select
+                                    Shop</label>
                                 <div class="col-sm-9">
-                                    <select id="type" name="select_shop">
-                                        <option id="select">Select Type</option>
-                                        <option id="shop_type">Db se aaega</option>
-                                        <option id="shop_type">Db se aaega</option>
-                                        <option id="shop_type">Db se aaega</option>
-                                        <option id="shop_type">Db se aaega</option>
+                                    <select name="product_shop" class="form-control">
+                                        <option value="">Select shop</option>
+                                        <?php foreach ($shops as $shop) { ?>
+                                            <option value="<?= $shop['shop_id'] ?>"><?= $shop['shop_name'] ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="border-top">
                             <div class="card-body">
+                                <button type="submit" name="btn_submit" class="btn btn-success">Submit</button>
                                <a href="<?php echo site_url();?>/dashboard_cont/dashboard"> <button type="button" name="btn_cancel" class="btn btn-default">Cancel</button></a>
-                                <button type="button" name="btn_submit" class="btn btn-success">Submit</button>
+
                             </div>
                         </div>
-                     </form>
+                    <?php echo form_close(); ?>
                 </div>
             </div>
         </div>

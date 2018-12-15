@@ -43,6 +43,7 @@ class User_model extends CI_Model{
             return $query->result();
         }
     }
+
     function update_user($user_id, $user_name, $user_email, $status){
 
         $this->db->set('user_name', $user_name);

@@ -12,8 +12,39 @@ class product_model extends CI_Model {
         parent::__construct();
     }
 
-    function insert_product () {
+    public function get_shops ()
+    {
+        $this-> db ->select('shop_id , shop_name');
+        $this-> db ->from('shop');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 
+    function insert_product ($product_data) {
+
+        try {
+            $this->db->set($product_data);
+            $result = $this->db->insert('product');
+            if ($result)
+            {
+                return $this->db->insert_id();
+            } else {
+                throw new Exception("Log database error");
+            }
+        } catch (Exception $e) {
+            log_message('error',$e->getMessage());
+            //return;
+        }
+        return false;
+    }
+
+
+    function insert_image_path ($product_id , $product_image) {
+
+            $this->db->set('product_image', $product_image);
+            $this->db->where('product_id', $product_id);
+            $result=$this->db->update('product');
+            return $result;
     }
 
     function product_list(){
