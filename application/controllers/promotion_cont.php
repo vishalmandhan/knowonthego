@@ -7,6 +7,7 @@ class promotion_cont extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
         $this->load->model('promotion_model');
+        $this->load->model('shop_model');
 
 		}
 
@@ -15,9 +16,37 @@ class promotion_cont extends CI_Controller {
        ============================================================== */
     public function add_promotion()
     {
+        if ($_POST) {
+            // validations first name is comes from the form name not db names
+            $this->form_validation->set_rules('promotion_description', 'Promotion Description', 'trim|required|min_length[3]');
+            $this->form_validation->set_rules('startDate', 'StartDate', 'trim|required');
+            $this->form_validation->set_rules('endDate', 'endDate', 'trim|required');
+            $this->form_validation->set_rules('promotion_product', 'Products', 'required');
+
+            // insert product into DB
+            if ($this->form_validation->run() == FALSE) {
+                // errors if form issues
+            } else {
+
+                $promotion_status = ($this->input->post('status')) ? 1 : 0;
+                $promotion_data = array(
+                    'promotion_description' => $this->input->post('promotion_description'),
+                    'startDate' => $this->input->post('startDate'),
+                    //md5 removed from below line
+                    'endDate' => $this->input->post('endDate'),
+                    'fk_product_id' => $this->input->post('promotion_product'),
+                    'status' => $promotion_status
+                );
+
+                $this->promotion_model->insert_promotion($promotion_data);
+            }
+        }
+
         $user_session['session_data'] = $this->session->userdata('user_login_data');
         $this->load->view('includes/dashboard_header', $user_session);
-        $this->load->view('know/add_promotion_view');
+        $data['products'] = $this->promotion_model->get_products();
+        $data['shops'] = $this->shop_model->get_shops_by_user();
+        $this->load->view('know/add_promotion_view',$data);
         $this->load->view('includes/dashboard_footer');
 
     }

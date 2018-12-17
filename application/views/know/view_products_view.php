@@ -212,7 +212,7 @@
             var product_description  = $('#product_description_edit').val();
             var product_price        = $('#product_price_edit').val();
             var product_image        = $('[name="product_image"]').val();
-            var shop_id_fk            = $('[name="shop_name"]').val();
+            var shop_id_fk           = $('[name="shop_name"]').val();
             $.ajax({
                 type : "POST",
                 url  : "<?php echo site_url('product_cont/product_update')?>",
@@ -223,7 +223,8 @@
                     $('[name="product_name_edit"]').val("");
                     $('[name="product_description_edit"]').val("");
                     $('[name="product_price_edit"]').val("");
-                    $('[name="product_image_edit"]').val("");
+                    $('[name="product_image_edit"]').attr('src' , data);
+                    // $('[name="product_image_edit"]').val("");
                     //$('#shop_list_dropdown').html("");
                     $('#model_edit').modal('hide');
                     show_product();

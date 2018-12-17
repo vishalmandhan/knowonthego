@@ -7,6 +7,7 @@ class product_cont extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
         $this->load->model('product_model');
+        $this->load->model('shop_model');
 
 		}
 
@@ -34,7 +35,6 @@ class product_cont extends CI_Controller {
                     'product_description' => $this->input->post('product_description'),
                     //md5 removed from below line
                     'product_price' => $this->input->post('product_price'),
-                    'product_image' => '',
                     'fk_shop_id' => $this->input->post('product_shop'),
 
                 );
@@ -47,9 +47,9 @@ class product_cont extends CI_Controller {
             // upload image
             $config['upload_path']   = 'assets/product_images';
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size']      = '100';
-            $config['max_width']     = '1024';
-            $config['max_height']    = '768';
+            //$config['max_size']      = '2048';
+            //$config['max_width']     = '1024';
+            //$config['max_height']    = '768';
             $config['file_name']    = $filename;
 
             $this->load->library('upload' , $config);
@@ -61,11 +61,10 @@ class product_cont extends CI_Controller {
             $data = $this->upload->data();
             $this->product_model->insert_image_path($product_id_new,$filename.$data['file_ext']);
 
-
         }
         $user_session['session_data'] = $this->session->userdata('user_login_data');
         $this->load->view('includes/dashboard_header', $user_session);
-        $data['shops'] = $this->product_model->get_shops();
+        $data['shops'] = $this->shop_model->get_shops_by_user();
         $this->load->view('know/add_product_view' , $data);
         $this->load->view('includes/dashboard_footer');
 
@@ -90,7 +89,6 @@ class product_cont extends CI_Controller {
         $product_name = $this->input->post('product_name');
         $product_description = $this->input->post('product_description');
         $product_price = $this->input->post('product_price');
-        $product_image=$this->input->post('product_image');
         $shop_id = $this->input->post('shop_id_fk');
 
         if(empty($product_id) || empty($product_name)
@@ -98,12 +96,32 @@ class product_cont extends CI_Controller {
             return false;
         }
 
-        $data=$this->product_model->update_product($product_id,$product_name,$product_description,$product_price,$product_image,$shop_id);
+        $filename = 'product_'.$product_id;
+
+        $config['upload_path']   = 'assets/product_images';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+//        $config['max_size']      = '100';
+//        $config['max_width']     = '1024';
+//        $config['max_height']    = '768';
+        $config['file_name']    =  $filename;
+
+        $this->load->library('upload' , $config);
+        $this->upload->initialize($config);
+        $field_name = "product_image";
+        if(!$this->upload->do_upload($field_name)) {
+            $upload_error = $this->upload->display_errors();
+        }
+        $data = $this->upload->data();
+        //$this->product_model->insert_image_path($product_id,$filename.$data['file_ext']);
+        //json_encode($data); exit;
+        $data=$this->product_model->update_product($product_id,$product_name,$product_description,$product_price,$filename.$data['file_ext'],$shop_id);
+
         echo json_encode($data);
     }
 
+
     public function shop_list(){
-        $data = $this->shop_model->get_shops();
+        $data = $this->shop_model->shop_list();
         echo json_encode($data);
     }
 

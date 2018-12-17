@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>User List</title>
+    <title>Promotion List</title>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/views/css/bootstrap.css'?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/views/css/jquery.dataTables.css'?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/views/css/dataTables.bootstrap4.css'?>">
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-12">
             <div class="col-md-12">
-                <h1>User
+                <h1>Promotion
                     <small>List</small>
                 </h1>
             </div>

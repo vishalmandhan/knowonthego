@@ -53,6 +53,8 @@
 <script src="<?php echo base_url();?>assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
 <script src="<?php echo base_url();?>assets/dist/js/pages/chart/chart-page-init.js"></script>
 
+
+
 </body>
 
 </html>

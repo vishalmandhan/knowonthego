@@ -24,6 +24,7 @@
     <script src="<?php echo base_url();?>assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
     <!--[if lt IE 9]>
 
     <![endif]-->
@@ -293,7 +294,7 @@
                                     class="mdi mdi-map-marker"></i><span class="hide-menu">Location </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
                             <li class="sidebar-item"><a
-                                        href="<?php echo site_url(); ?>/locationView_cont/view_shop_locations"
+                                        href="<?php echo site_url(); ?>/shop_cont/view_shop_location"
                                         class="sidebar-link"><i
                                             class="mdi mdi-note-outline"></i><span class="hide-menu"> View Shop </span></a>
                             </li>

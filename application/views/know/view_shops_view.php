@@ -1,512 +1,340 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style type="text/css">
-        body {
-            color: #566787;
-            background: #f5f5f5;
-            font-family: 'Varela Round', sans-serif;
-            font-size: 13px;
-        }
-
-        .table-wrapper {
-            background: #fff;
-            padding: 20px 25px;
-            margin: 30px 0;
-            border-radius: 3px;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-        }
-
-        .table-title {
-            padding-bottom: 15px;
-            background: #435d7d;
-            color: #fff;
-            padding: 16px 30px;
-            margin: -20px -25px 10px;
-            border-radius: 3px 3px 0 0;
-        }
-
-        .table-title h2 {
-            margin: 5px 0 0;
-            font-size: 24px;
-        }
-
-        .table-title .btn-group {
-            float: right;
-        }
-
-        .table-title .btn {
-            color: #fff;
-            float: right;
-            font-size: 13px;
-            border: none;
-            min-width: 50px;
-            border-radius: 2px;
-            border: none;
-            outline: none !important;
-            margin-left: 10px;
-        }
-
-        .table-title .btn i {
-            float: left;
-            font-size: 21px;
-            margin-right: 5px;
-        }
-
-        .table-title .btn span {
-            float: left;
-            margin-top: 2px;
-        }
-
-        table.table tr th, table.table tr td {
-            border-color: #e9e9e9;
-            padding: 12px 15px;
-            vertical-align: middle;
-        }
-
-        table.table tr th:first-child {
-            width: 60px;
-        }
-
-        table.table tr th:last-child {
-            width: 100px;
-        }
-
-        table.table-striped tbody tr:nth-of-type(odd) {
-            background-color: #fcfcfc;
-        }
-
-        table.table-striped.table-hover tbody tr:hover {
-            background: #f5f5f5;
-        }
-
-        table.table th i {
-            font-size: 13px;
-            margin: 0 5px;
-            cursor: pointer;
-        }
-
-        table.table td:last-child i {
-            opacity: 0.9;
-            font-size: 22px;
-            margin: 0 5px;
-        }
-
-        table.table td a {
-            font-weight: bold;
-            color: #566787;
-            display: inline-block;
-            text-decoration: none;
-            outline: none !important;
-        }
-
-        table.table td a:hover {
-            color: #2196F3;
-        }
-
-        table.table td a.edit {
-            color: #FFC107;
-        }
-
-        table.table td a.delete {
-            color: #F44336;
-        }
-
-        table.table td i {
-            font-size: 19px;
-        }
-
-        table.table .avatar {
-            border-radius: 50%;
-            vertical-align: middle;
-            margin-right: 10px;
-        }
-
-        .pagination {
-            float: right;
-            margin: 0 0 5px;
-        }
-
-        .pagination li a {
-            border: none;
-            font-size: 13px;
-            min-width: 30px;
-            min-height: 30px;
-            color: #999;
-            margin: 0 2px;
-            line-height: 30px;
-            border-radius: 2px !important;
-            text-align: center;
-            padding: 0 6px;
-        }
-
-        .pagination li a:hover {
-            color: #666;
-        }
-
-        .pagination li.active a, .pagination li.active a.page-link {
-            background: #03A9F4;
-        }
-
-        .pagination li.active a:hover {
-            background: #0397d6;
-        }
-
-        .pagination li.disabled i {
-            color: #ccc;
-        }
-
-        .pagination li i {
-            font-size: 16px;
-            padding-top: 6px
-        }
-
-        .hint-text {
-            float: left;
-            margin-top: 10px;
-            font-size: 13px;
-        }
-
-        /* Custom checkbox */
-        .custom-checkbox {
-            position: relative;
-        }
-
-        .custom-checkbox input[type="checkbox"] {
-            opacity: 0;
-            position: absolute;
-            margin: 5px 0 0 3px;
-            z-index: 9;
-        }
-
-        .custom-checkbox label:before {
-            width: 18px;
-            height: 18px;
-        }
-
-        .custom-checkbox label:before {
-            content: '';
-            margin-right: 10px;
-            display: inline-block;
-            vertical-align: text-top;
-            background: white;
-            border: 1px solid #bbb;
-            border-radius: 2px;
-            box-sizing: border-box;
-            z-index: 2;
-        }
-
-        .custom-checkbox input[type="checkbox"]:checked + label:after {
-            content: '';
-            position: absolute;
-            left: 6px;
-            top: 3px;
-            width: 6px;
-            height: 11px;
-            border: solid #000;
-            border-width: 0 3px 3px 0;
-            transform: inherit;
-            z-index: 3;
-            transform: rotateZ(45deg);
-        }
-
-        .custom-checkbox input[type="checkbox"]:checked + label:before {
-            border-color: #03A9F4;
-            background: #03A9F4;
-        }
-
-        .custom-checkbox input[type="checkbox"]:checked + label:after {
-            border-color: #fff;
-        }
-
-        .custom-checkbox input[type="checkbox"]:disabled + label:before {
-            color: #b8b8b8;
-            cursor: auto;
-            box-shadow: none;
-            background: #ddd;
-        }
-
-        /* Modal styles */
-        .modal .modal-dialog {
-            max-width: 400px;
-        }
-
-        .modal .modal-header, .modal .modal-body, .modal .modal-footer {
-            padding: 20px 30px;
-        }
-
-        .modal .modal-content {
-            border-radius: 3px;
-        }
-
-        .modal .modal-footer {
-            background: #ecf0f1;
-            border-radius: 0 0 3px 3px;
-        }
-
-        .modal .modal-title {
-            display: inline-block;
-        }
-
-        .modal .form-control {
-            border-radius: 2px;
-            box-shadow: none;
-            border-color: #dddddd;
-        }
-
-        .modal textarea.form-control {
-            resize: vertical;
-        }
-
-        .modal .btn {
-            border-radius: 2px;
-            min-width: 100px;
-        }
-
-        .modal form label {
-            font-weight: normal;
-        }
-    </style>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Activate tooltip
-            $('[data-toggle="tooltip"]').tooltip();
-
-            // Select/Deselect checkboxes
-            var checkbox = $('table tbody input[type="checkbox"]');
-            $("#selectAll").click(function () {
-                if (this.checked) {
-                    checkbox.each(function () {
-                        this.checked = true;
-                    });
-                } else {
-                    checkbox.each(function () {
-                        this.checked = false;
-                    });
-                }
-            });
-            checkbox.click(function () {
-                if (!this.checked) {
-                    $("#selectAll").prop("checked", false);
-                }
-            });
-        });
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Shop List</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/views/css/bootstrap.css'?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/views/css/jquery.dataTables.css'?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/views/css/dataTables.bootstrap4.css'?>">
 </head>
 <body>
 <div class="container">
-    <div class="table-wrapper">
-        <!--        <div class="table-title">-->
-        <!--            <div class="row">-->
-        <!--                <div class="col-sm-6">-->
-        <!--                    <h2>Manage <b>Employees</b></h2>-->
-        <!--                </div>-->
-        <!--                <div class="col-sm-6">-->
-        <!--                    <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>-->
-        <!--                    <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-12">
+            <div class="col-md-12">
+                <h1>Shop
+                    <small>List</small>
+                </h1>
+            </div>
 
-                <th>Id</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
+            <table class="table table-striped" id="mydata">
+                <thead>
+                <tr>
+                    <th width="70">Name</th>
+                    <th width="90">Address</th>
+                    <th width="60">Country</th>
+                    <th width="50">City</th>
+                    <th width="220">Location</th>
+                    <th width="50">Status</th>
+                    <th width="50">User</th>
+                    <th style="text-align: right;">Actions</th>
+                </tr>
+                </thead>
+                <tbody id="show_data">
 
-                <td>01</td>
-                <td>Outfitters</td>
-                <td>Dolmen Mall Sea View Rd, Block 4 Clifton</td>
-                <td>Karachi</td>
-                <td>
-                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                         data-toggle="tooltip"
-                                                                                         title="Delete">&#xE872;</i></a>
-                </td>
-            </tr>
-            <tr>
-
-                <td>02</td>
-                <td>Levis</td>
-                <td>Rex Centre, Fatima Jinnah Rd, Saddar Town,</td>
-                <td>Karachi</td>
-                <td>
-                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                         data-toggle="tooltip"
-                                                                                         title="Delete">&#xE872;</i></a>
-                </td>
-            </tr>
-            <tr>
-
-                <td>03</td>
-                <td>Bonanza</td>
-                <td>Bonanza - Ground Floor, Ocean Mall</td>
-                <td>Karachi</td>
-                <td>
-                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                         data-toggle="tooltip"
-                                                                                         title="Delete">&#xE872;</i></a>
-                </td>
-            </tr>
-            <tr>
-
-                <td>04</td>
-                <td>Ideas</td>
-                <td>Tariq Rd, Liberty Chowk, PECHS</td>
-                <td>Karachi</td>
-                <td>
-                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                         data-toggle="tooltip"
-                                                                                         title="Delete">&#xE872;</i></a>
-                </td>
-            </tr>
-            <tr>
-
-                <td>05</td>
-                <td>Stoneage</td>
-                <td>Zamzama Commercial Area Defence Phase 5</td>
-                <td>Karachi</td>
-                <td>
-                    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons"
-                                                                                     data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons"
-                                                                                         data-toggle="tooltip"
-                                                                                         title="Delete">&#xE872;</i></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="clearfix">
-            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-            <ul class="pagination">
-                <li class="page-item disabled"><a href="#">Previous</a></li>
-                <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item "><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">5</a></li>
-                <li class="page-item"><a href="#" class="page-link">Next</a></li>
-            </ul>
+                </tbody>
+            </table>
         </div>
     </div>
+
 </div>
-<!-- Edit Modal HTML -->
-<div id="addEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
+
+<!-- MODAL EDIT -->
+<form>
+    <div class="modal fade" id="model_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit shop</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" required>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Name</label>
+                        <div class="col-md-10">
+                            <input type="hidden" name="shop_id_edit" id="shop_id_edit" />
+                            <input type="text" name="shop_name_edit" id="shop_name_edit" class="form-control" placeholder=" Enter Name">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" required>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Address</label>
+                        <div class="col-md-10">
+                            <input type="text" name="shop_address_edit" id="shop_address_edit" class="form-control" placeholder="Enter Address">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Address</label>
-                        <textarea class="form-control" required></textarea>
+                    <div class="form-group row">
+                        <label for="select country" class="col-md-2 col-form-label">Country</label>
+                        <div class="col-sm-10" id="country_list_dropdown">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" class="form-control" required>
+                    <div class="form-group row">
+                        <label for="select city" class="col-md-2 col-form-label">Select City</label>
+                        <div class="col-sm-10" id="city_list_dropdown">
+                        </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Location</label>
+                        <div class="col-md-10">
+                            <input type="text" name="shop_location_edit" id="shop_location_edit" class="form-control" placeholder="Map Location">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Status</label>
+                        <div class="col-md-1">
+                            <input type="checkbox" name="shop_status_edit" id="shop_status_edit" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="select shop" class="col-md-2 col-form-label">Select User</label>
+                        <div class="col-sm-10" id="user_list_dropdown">
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-success" value="Add">
+                    <button type="button" type="submit" id="btn_update" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-<!-- Edit Modal HTML -->
-<div id="editEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
+</form>
+<!--END MODAL EDIT-->
+
+<!--MODAL DELETE-->
+<form>
+    <div class="modal fade" id="model_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Edit Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Shop</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Address</label>
-                        <textarea class="form-control" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone</label>
-                        <input type="text" class="form-control" required>
-                    </div>
+                    <strong>Are you sure to delete this record?</strong>
                 </div>
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-info" value="Save">
+                    <input type="hidden" name="shop_id_delete" id="shop_id_delete" class="form-control">
+                    <button type="submit" id="btn_delete" class="btn btn-primary">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-<!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete these Records?</p>
-                    <p class="text-warning">
-                        <small>This action cannot be undone.</small>
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+</form>
+<!--END MODAL DELETE-->
+
+<script type="text/javascript" src="<?php echo base_url().'assets/views/js/jquery.dataTables.js'?>"></script>
+<script type="text/javascript" src="<?php echo base_url().'assets/views/js/bootstrap.js'?>"></script>
+<script type="text/javascript" src="<?php echo base_url().'assets/views/js/dataTables.bootstrap4.js'?>"></script>
+
+<script type="text/javascript">
+    $('#mydata').dataTable();
+
+    $(document).ready(function(){
+        //call function show all product
+        show_shops();
+
+
+        //function show all countries
+        function show_countries(selected_shop_id){
+            $.ajax({
+                type  : 'ajax',
+                url   : '<?php echo site_url('product_cont/shop_list')?>',
+                async : true,
+                dataType : 'json',
+                success : function(data){
+
+                    var html = '<select name="shop_name" id="shop_select_box"  class="form-control">';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        var selected = "";
+                        if(data[i].shop_id == selected_shop_id) {
+                            selected = "selected";
+                        }
+                        html += '<option value="'+data[i].shop_id+'" '+selected+'>' + data[i].shop_name + '</option>';
+                    }
+                    html += '</select>';
+                    $('#shop_list_dropdown').html(html);
+
+                    $("#shop_select_box").on('change',function(){
+                        var shop_id = $(this).val();
+                        show_shops_products(shop_id);
+                    });
+                }
+
+            });
+        }
+
+        //function show products of selected shops on change
+        function show_countries_cities(shop_id){
+            $.ajax({
+                type : "POST",
+                url   : '<?php echo site_url('promotion_cont/get_products_by_shop')?>',
+                data: {shop_id:shop_id},
+                dataType : 'json',
+                success : function(data){
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<option value="'+data[i].product_id+'">' + data[i].product_name + '</option>';
+                    }
+                    $('#shop_products').html(html);
+                }
+
+            });
+        }
+
+        //function show all products
+        function show_products(shop_id,selected_product_id){
+            $.ajax({
+                type  : 'POST',
+                url   : '<?php echo site_url('promotion_cont/get_products_by_shop')?>',
+                data : {shop_id:shop_id},
+                dataType : 'json',
+                success : function(data){
+
+                    var html = '<select name="product_name" id="shop_products"  class="form-control">';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        var selected = "";
+                        if(data[i].product_id == selected_product_id) {
+                            selected = "selected";
+                        }
+                        html += '<option value="'+data[i].product_id+'" '+selected+'>' + data[i].product_name + '</option>';
+                    }
+                    html += '</select>';
+                    $('#product_list_dropdown').html(html);
+                }
+
+            });
+        }
+
+
+        //function show all shops
+        function show_shops(){
+            $.ajax({
+                type  : 'ajax',
+                url   : '<?php echo site_url('shop_cont/shop_data')?>',
+                async : true,
+                dataType : 'json',
+                success : function(data){
+                    var html = '';
+
+                    var i;
+                    for(i=0; i<data.length; i++){
+                        var activeTxt = "";
+                        if(data[i].is_active == 1) { activeTxt = "Active" } else { activeTxt = "Inactive" };
+                        html += '<tr>'+
+                            '<td>'+data[i].shop_name+'</td>'+
+                            '<td>'+data[i].shop_address+'</td>'+
+                            '<td>'+data[i].country_name+'</td>'+
+                            '<td>'+data[i].city_name+'</td>'+
+                            '<td>'+data[i].map_location+'</td>'+
+                            '<td>'+activeTxt+'</td>'+
+                            '<td>'+data[i].user_name+'</td>'+
+                            '<td style="text-align:right;">'+
+                            '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-shop_id="'+data[i].shop_id+'" data-shop_name="'+data[i].shop_name+'" data-shop_address="'+data[i].shop_address+'" data-country_name="'+data[i].country_name+'" data-city_name="'+data[i].city_name+'" data-map_location="'+data[i].map_location+'" data-is_active="'+data[i].is_active+'">Edit</a>'+' '+
+                            '<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-shop_id="'+data[i].shop_id+'">Delete</a>'+
+                            '</td>'+
+                            '</tr>';
+                    }
+                    $('#show_data').html(html);
+                }
+
+            });
+        }
+
+        //get data for update record
+        $('#show_data').on('click','.item_edit',function(){
+            var shop_id                  = $(this).data('shop_id');
+            var shop_name                = $(this).data('shop_name');
+            var shop_address             = $(this).data('shop_address');
+            var country_id               = $(this).data('country_id');
+            var city_id                  = $(this).data('city_id');
+            var map_location             = $(this).data('map_location');
+
+            // show_shops(shop_id);
+            // show_products(shop_id,product_id);
+
+            $('#model_edit').modal('show');
+            $('[name="shop_id_edit"]').val(shop_id);
+            $('[name="shop_name_edit"]').val(shop_name);
+            $('[name="shop_address_edit"]').val(shop_address);
+            $('[name="shop_location_edit"]').val(map_location);
+            if($(this).data('is_active') == "1") {
+                $('[name="shop_status_edit"]').prop("checked",true);
+            } else {
+                $('[name="shop_status_edit"]').prop("checked",false);
+            }
+
+        });
+
+        //update record to database
+        $('#btn_update').on('click',function(){
+            var promotion_id                  = $('#promotion_id_edit').val();
+            var promotion_description         = $('#promotion_description_edit').val();
+            var startDate                     = $('#promotion_startDate_edit').val();
+            var endDate                       = $('#promotion_endDate_edit').val();
+            var shop_id_fk                    = $('[name="shop_name"]').val();
+            var product_id_fk                 = $('[name="product_name"]').val();
+            var status         = 0;
+
+            if($('#promotion_status_edit').is(':checked')) {
+                status = 1;
+            }
+
+            $.ajax({
+                type : "POST",
+                url  : "<?php echo site_url('promotion_cont/promotion_update')?>",
+                dataType : "JSON",
+                data : {promotion_id:promotion_id, promotion_description:promotion_description, startDate:startDate, endDate:endDate, status:status, shop_id_fk:shop_id_fk, product_id_fk:product_id_fk },
+                success: function(data){
+                    $('[name="promotion_id_edit"]').val("");
+                    $('[name="promotion_description_edit"]').val("");
+                    $('[name="promotion_startDate_edit"]').val("");
+                    $('[name="promotion_endDate_edit"]').val("");
+                    $('[name="promotion_status_edit"]').val("");
+
+                    $('#model_edit').modal('hide');
+
+                    show_promotion();
+                }
+            });
+            return true;
+        });
+
+        //get data for delete record
+        $('#show_data').on('click','.item_delete',function(){
+            var shop_id = $(this).data('shop_id');
+            $('#model_delete').modal('show');
+            $('[name="shop_id_delete"]').val(shop_id);
+        });
+
+        //delete record to database
+        $('#btn_delete').on('click',function(){
+            var shop_id = $('#shop_id_delete').val();
+            $.ajax({
+                type : "POST",
+                url  : "<?php echo site_url('shop_cont/shop_delete')?>",
+                dataType : "JSON",
+                data : {shop_id:shop_id},
+                success: function(data){
+
+                    $('[name="shop_id_delete"]').val("");
+                    $('#model_delete').modal('hide');
+
+                    show_shops();
+                }
+            });
+            return false;
+        });
+    });
+</script>
 </body>
 </html>

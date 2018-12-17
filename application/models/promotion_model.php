@@ -6,14 +6,14 @@ class promotion_model extends CI_Model
         parent::__construct();
     }
 
-    public function products()
+    public function get_products()
     {
 
-        $this->db->select('product_id , product_name');
-        $this->db->from('product');
-        $query = $this->db->get();
+            $this->db->select('product_id , product_name');
+            $this->db->from('product');
+            $query = $this->db->get();
 
-        return $query->result_array();
+            return $query->result_array();
     }
 
     public function insert_promotion($promotion_data)
@@ -31,7 +31,7 @@ class promotion_model extends CI_Model
             log_message('error', $e->getMessage());
             return;
         }
-        return true;
+        return false;
     }
 
 
@@ -71,7 +71,6 @@ class promotion_model extends CI_Model
         $result=$this->db->update('promotion');
         return $result;
     }
-
 
     function delete_promotion($promotion_id)
     {

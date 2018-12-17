@@ -12,14 +12,6 @@ class product_model extends CI_Model {
         parent::__construct();
     }
 
-    public function get_shops ()
-    {
-        $this-> db ->select('shop_id , shop_name');
-        $this-> db ->from('shop');
-        $query = $this->db->get();
-        return $query->result_array();
-    }
-
     function insert_product ($product_data) {
 
         try {
@@ -39,7 +31,8 @@ class product_model extends CI_Model {
     }
 
 
-    function insert_image_path ($product_id , $product_image) {
+    function insert_image_path ($product_id , $product_image)
+    {
 
             $this->db->set('product_image', $product_image);
             $this->db->where('product_id', $product_id);

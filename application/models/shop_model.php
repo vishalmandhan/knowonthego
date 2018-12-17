@@ -12,33 +12,35 @@ class shop_model extends CI_Model {
         parent::__construct();
     }
 
-    function get_shops(){
-        if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
-            $query = $this->db->select('*')
-                ->from('shop')
-                ->get();
-            return $query->result();
-        }
-        $user_id = $_SESSION['user_login_data']['user_id'];
-        $query = $this->db->select('*')
-            ->from('shop')
-            ->where('fk_user_id', (int)$user_id)
-            ->get();
-        return $query->result();
+    public function get_countries()
+    {
+        $this->db->select('country_id , country_name');
+        $this->db->from('country');
+        $query = $this->db->get();
+
+        return $query->result_array();
     }
 
-    public function user_names() {
+    public function get_cities()
+    {
+        $this->db->select('city_id , city_name');
+        $this->db->from('city');
+        $query = $this->db->get();
 
-       // $query = $this->db->query('SELECT * FROM users;');
+        return $query->result_array();
+    }
 
-            $this->db->select('*');
+    public function get_users()
+    {
+            $this->db->select('user_id , user_name');
             $this->db->from('users');
             $query = $this->db->get();
 
-            return $query->result();
-        }
+            return $query->result_array();
+    }
 
-    public function insert_shop($user_data) {
+    public function insert_shop($user_data)
+    {
 
         try {
             $this->db->set($user_data);
@@ -55,5 +57,92 @@ class shop_model extends CI_Model {
         }
         return true;
     }
+
+    function shop_list()
+    {
+        if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
+            $query = $this->db->select('sh.*,con.country_id,con.country_name,c.city_id,c.city_name,u.user_id,u.user_name')
+                ->from('shop as sh')
+                ->join('country as con', 'sh.fk_country_id = con.country_id', 'LEFT')
+                ->join('city as c', 'sh.fk_city_id = c.city_id', 'LEFT')
+                ->join('users as u', 'sh.fk_user_id = u.user_id', 'LEFT')
+                ->get();
+            return $query->result();
+        }
+        $user_id = $_SESSION['user_login_data']['user_id'];
+        $query = $this->db->select('sh.*,con.country_id,con.country_name,c.city_id,c.city_name,u.user_id,u.user_name')
+            ->from('shop as sh')
+            ->join('country as con', 'sh.fk_country_id = con.country_id', 'LEFT')
+            ->join('city as c', 'sh.fk_city_id = c.city_id', 'LEFT')
+            ->join('users as u', 'sh.fk_user_id = u.user_id', 'LEFT')
+            ->where('u.user_id', (int)$user_id)
+            ->get();
+        return $query->result();
+
+    }
+
+
+    function delete_shop($shop_id)
+    {
+        $this->db->where('shop_id', $shop_id);
+        $result = $this->db->delete('shop');
+        return $result;
+    }
+
+    function get_shop_location()
+    {
+        if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
+            $return = array();
+            $this->db->select("lat,lng,shop_name");
+            $this->db->from("shop");
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    array_push($return, $row);
+                }
+            }
+            return $return;
+        }
+        $user_id = $_SESSION['user_login_data']['user_id'];
+        $return = array();
+        $query = $this->db->select("s.lat,s.lng,s.shop_name, u.user_id")
+            ->from("shop as s")
+            ->join('users as u', 's.fk_user_id = u.user_id', 'LEFT')
+            ->where('u.user_id', (int)$user_id)
+            ->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                array_push($return, $row);
+            }
+        }
+        return $return;
+    }
+
+    public function get_shops_by_user()
+    {
+        if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
+            $this->db->select('shop_id , shop_name');
+            $this->db->from('shop');
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+        $user_id = $_SESSION['user_login_data']['user_id'];
+        $this->db->select('shop_id , shop_name');
+        $this->db->where('fk_user_id',$user_id);
+        $this->db->from('shop');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    function get_cities_by_country($country_id) {
+        $this->db->select('city_id , city_name');
+        $this->db->where('fk_country_id',$country_id);
+        $this->db->from('city');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
 
 }

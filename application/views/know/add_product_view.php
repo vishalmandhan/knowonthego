@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
+
                     <?php echo form_open_multipart('product_cont/add_product', 'class="form-horizontal"')?>
                         <div class="card-body">
                             <h4 class="card-title">Add Product Details</h4>

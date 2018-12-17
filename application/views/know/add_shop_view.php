@@ -21,7 +21,7 @@
                     <div class="form-group row">
 <!--                        <label for="name" class="col-sm-3 text-right control-label col-form-label">Id</label>-->
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="userid" placeholder="Shop Id" hidden>
+                            <input type="text" class="form-control" name="shop_id" placeholder="Shop Id" hidden>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -35,45 +35,46 @@
                         <label for="shop_address" class="col-sm-3 text-right control-label col-form-label">Shop
                             Address</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="shop_address"
-                                   placeholder="Enter Shop Address">
+                            <input type="text" class="form-control" name="shop_address" placeholder="Enter Shop Address">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="city" class="col-sm-3 text-right control-label col-form-label">City Name</label>
+                        <label for="select country" class="col-sm-3 text-right control-label col-form-label">Select
+                            Country</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="city" placeholder="Enter City Name">
+                            <select id="country_select_option" name="shop_country" class="form-control">
+                                <option value="">Select Country</option>
+                                <?php foreach ($countries as $country) { ?>
+                                    <option value="<?= $country['country_id'] ?>"><?= $country['country_name'] ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="country" class="col-sm-3 text-right control-label col-form-label">Country
-                            Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" name="country" placeholder="Enter Country Name">
+                        <div class="col-sm-9" id="div_cities_select_box">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="map_location" class="col-sm-3 text-right control-label col-form-label">Map
                             Location</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="map_location"
-                                   placeholder="Enter Shop Location">
+                            <input type="text" class="form-control" name="map_location" placeholder="Enter Shop Location">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="is_active" class="col-sm-3 text-right control-label col-form-label">Status</label>
                         <div class="col-sm-1">
-                            <input type="checkbox" class="form-control" name="status" checked>
+                            <input type="checkbox" checked="checked" name="status">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="select user" class="col-sm-3 text-right control-label col-form-label">Select
-                            Type</label>
+                            User</label>
                         <div class="col-sm-9">
-                            <select name="user_name" class="form-control">
-                                <option value="">Select Type</option>
-                                <?php foreach ($user_names as $user_name) { ?>
-                                    <option value="<?= $user_name['user_id'] ?>"><?= $user_name['user_name'] ?></option>
+                            <select name="shop_users" class="form-control">
+                                <option value="">Select User</option>
+                                <?php foreach ($users as $user) { ?>
+                                    <option value="<?= $user['user_id'] ?>"><?= $user['user_name'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -81,10 +82,10 @@
                 </div>
                 <div class="border-top">
                     <div class="card-body">
+                        <button type="submit" name="btn_submit" class="btn btn-success">Submit</button>
                         <a href="<?php echo site_url(); ?>/dashboard_cont/dashboard">
                             <button type="button" name="btn_cancel" class="btn btn-default">Cancel</button>
                         </a>
-                        <button type="submit" name="btn_submit" class="btn btn-success">Submit</button>
                     </div>
                 </div>
                 <!--                     </form>-->
@@ -101,3 +102,32 @@
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
+<script type="text/javascript">
+    $("#country_select_option").on('change',function(){
+        var country_id = $(this).val();
+        show_cities(country_id);
+    });
+
+    //function show products of selected shops on change
+    function show_cities(country_id){
+        $.ajax({
+            type : "POST",
+            url   : '<?php echo site_url('shop_cont/get_cities_by_country')?>',
+            data: {country:country_id},
+            dataType : 'json',
+            success : function(data){
+                var html = '<select name="shop_city" class="form-control">';
+                for (var i = 0; i < data.length; i++) {
+                    html += '<option value="'+data[i].city_id+'">' + data[i].city_name + '</option>';
+                }
+                html += '</select>';
+                $('#div_cities_select_box').html(html);
+
+                var label_product = '<label for="select city" class="col-sm-3 text-right control-label col-form-label cityLabel">Select City</label>';
+                $('.cityLabel').remove();
+                $('#div_cities_select_box').before(label_product);
+            }
+
+        });
+    }
+</script>
