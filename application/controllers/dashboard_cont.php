@@ -13,8 +13,6 @@ class dashboard_cont extends CI_Controller
         }
     }
 
-
-
     public function dashboard()
     {
         $user_session['session_data'] = $this->session->userdata('user_login_data');
@@ -22,8 +20,6 @@ class dashboard_cont extends CI_Controller
         $this->load->view('know/dashboard_view');
         $this->load->view('includes/dashboard_footer');
     }
-
-
 
 
     /*   ==============================================================
@@ -36,8 +32,6 @@ class dashboard_cont extends CI_Controller
         $this->load->view('know/pages-calendar');
         $this->load->view('includes/dashboard_footer');
     }
-
-
 
 }
 

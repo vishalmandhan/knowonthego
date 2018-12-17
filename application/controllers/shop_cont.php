@@ -49,7 +49,10 @@ class shop_cont extends CI_Controller {
         $this->load->view('includes/dashboard_header', $user_session);
         $data['countries'] = $this->shop_model->get_countries();
         $data['cities'] = $this->shop_model->get_cities();
-        $data['users'] = $this->shop_model->get_users();
+
+        if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
+            $data['users'] = $this->shop_model->get_users();
+        }
         $this->load->view('know/add_shop_view' , $data);
         $this->load->view('includes/dashboard_footer');
 

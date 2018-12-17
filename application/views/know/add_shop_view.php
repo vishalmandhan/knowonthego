@@ -37,8 +37,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="select country" class="col-sm-3 text-right control-label col-form-label">Select
-                            Country</label>
+                        <label for="select country" class="col-sm-3 text-right control-label col-form-label">Select Country</label>
                         <div class="col-sm-9">
                             <select id="country_select_option" name="shop_country" class="form-control">
                                 <option value="">Select Country</option>
@@ -65,9 +64,9 @@
                             <input type="checkbox" checked="checked" name="status">
                         </div>
                     </div>
+                    <?php if ($session_data['is_admin']) { ?>
                     <div class="form-group row">
-                        <label for="select user" class="col-sm-3 text-right control-label col-form-label">Select
-                            User</label>
+                        <label for="select user" class="col-sm-3 text-right control-label col-form-label">Select User</label>
                         <div class="col-sm-9">
                             <select name="shop_users" class="form-control">
                                 <option value="">Select User</option>
@@ -77,6 +76,7 @@
                             </select>
                         </div>
                     </div>
+                    <?php } ?>
                 </div>
                 <div class="border-top">
                     <div class="card-body">
