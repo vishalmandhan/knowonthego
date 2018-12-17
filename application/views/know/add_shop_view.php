@@ -15,11 +15,9 @@
                 ?>
 
                 <?php echo form_open('shop_cont/add_shop', 'class="form-horizontal"'); ?>
-                <!--                     <form class="form-horizontal" method="post">-->
                 <div class="card-body">
                     <h4 class="card-title">Add Shop Details</h4>
                     <div class="form-group row">
-<!--                        <label for="name" class="col-sm-3 text-right control-label col-form-label">Id</label>-->
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="shop_id" placeholder="Shop Id" hidden>
                         </div>
@@ -88,7 +86,6 @@
                         </a>
                     </div>
                 </div>
-                <!--                     </form>-->
                 <?php echo form_close(); ?>
 
             </div>
