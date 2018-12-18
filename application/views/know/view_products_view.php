@@ -40,7 +40,7 @@
 </div>
 
 <!-- MODAL EDIT -->
-<form>
+<form action="<?php echo site_url('product_cont/product_update')?>" enctype="multipart/form-data" method="post" id="form">
     <div class="modal fade" id="model_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" type="submit" id="btn_update" class="btn btn-primary">Update</button>
+                    <button type="submit" id="btn_update" class="btn btn-primary">Update</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -206,18 +206,24 @@
         });
 
         //update record to database
-        $('#btn_update').on('click',function(){
+        $("#form").on('submit',(function(e) {
+            e.preventDefault();
             var product_id           = $('#product_id_edit').val();
             var product_name         = $('#product_name_edit').val();
             var product_description  = $('#product_description_edit').val();
             var product_price        = $('#product_price_edit').val();
             var product_image        = $('[name="product_image"]').val();
             var shop_id_fk           = $('[name="shop_name"]').val();
+
             $.ajax({
                 type : "POST",
                 url  : "<?php echo site_url('product_cont/product_update')?>",
                 dataType : "JSON",
-                data : {product_id:product_id, product_name:product_name, product_description:product_description, product_price:product_price, product_image:product_image, shop_id_fk:shop_id_fk},
+                data:  new FormData(this),
+                contentType: false,
+                cache: false,
+                processData:false,
+                //data : {product_id:product_id, product_name:product_name, product_description:product_description, product_price:product_price, product_image:product_image, shop_id_fk:shop_id_fk},
                 success: function(data){
                     $('[name="product_id_edit"]').val("");
                     $('[name="product_name_edit"]').val("");
@@ -231,7 +237,7 @@
                 }
             });
             return true;
-        });
+        }));
 
         //get data for delete record
         $('#show_data').on('click','.item_delete',function(){

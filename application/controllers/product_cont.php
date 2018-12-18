@@ -85,11 +85,11 @@ class product_cont extends CI_Controller {
 
     public function product_update(){
 
-        $product_id = $this->input->post('product_id');
-        $product_name = $this->input->post('product_name');
-        $product_description = $this->input->post('product_description');
-        $product_price = $this->input->post('product_price');
-        $shop_id = $this->input->post('shop_id_fk');
+        $product_id = $this->input->post('product_id_edit');
+        $product_name = $this->input->post('product_name_edit');
+        $product_description = $this->input->post('product_description_edit');
+        $product_price = $this->input->post('product_price_edit');
+        $shop_id = $this->input->post('shop_name');
 
         if(empty($product_id) || empty($product_name)
             || empty($product_price) || empty($shop_id) || !is_numeric($product_price)) {

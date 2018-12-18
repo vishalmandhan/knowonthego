@@ -58,7 +58,7 @@ class shop_model extends CI_Model {
         return true;
     }
 
-    function shop_list()
+     public function shop_list()
     {
         if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
             $query = $this->db->select('sh.*,con.country_id,con.country_name,c.city_id,c.city_name,u.user_id,u.user_name')
@@ -79,14 +79,6 @@ class shop_model extends CI_Model {
             ->get();
         return $query->result();
 
-    }
-
-
-    function delete_shop($shop_id)
-    {
-        $this->db->where('shop_id', $shop_id);
-        $result = $this->db->delete('shop');
-        return $result;
     }
 
     function get_shop_location()
@@ -142,6 +134,28 @@ class shop_model extends CI_Model {
         $query = $this->db->get();
 
         return $query->result_array();
+    }
+
+    function update_shop($shop_id, $shop_name, $shop_address, $city_id, $country_id, $map_location, $is_active){
+
+        $this->db->set('shop_id', $shop_id);
+        $this->db->set('shop_name', $shop_name);
+        $this->db->set('shop_address', $shop_address);
+        $this->db->set('fk_city_id', $city_id);
+        $this->db->set('fk_country_id', $country_id);
+        $this->db->set('map_location', $map_location);
+        $this->db->set('is_active', $is_active);
+
+        $this->db->where('shop_id', $shop_id);
+        $result=$this->db->update('shop');
+        return $result;
+    }
+
+    function delete_shop($shop_id)
+    {
+        $this->db->where('shop_id', $shop_id);
+        $result = $this->db->delete('shop');
+        return $result;
     }
 
 

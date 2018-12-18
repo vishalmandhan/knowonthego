@@ -100,6 +100,9 @@ class promotion_cont extends CI_Controller {
 
     public function get_products_by_shop(){
         $shop_id = $this->input->post('shop_id');
+        if(empty($shop_id)) {
+            return false;
+        }
         $data = $this->product_model->get_products_by_shop($shop_id);
         echo json_encode($data);
     }

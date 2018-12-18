@@ -28,7 +28,7 @@
                     <th width="50">City</th>
                     <th width="220">Location</th>
                     <th width="50">Status</th>
-                    <th width="50">User</th>
+                    <th width="50">Users</th>
                     <th style="text-align: right;">Actions</th>
                 </tr>
                 </thead>
@@ -88,12 +88,6 @@
                             <input type="checkbox" name="shop_status_edit" id="shop_status_edit" class="form-control">
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="select shop" class="col-md-2 col-form-label">Select User</label>
-                        <div class="col-sm-10" id="user_list_dropdown">
-                        </div>
-                    </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" type="submit" id="btn_update" class="btn btn-primary">Update</button>
@@ -141,81 +135,6 @@
         //call function show all product
         show_shops();
 
-
-        //function show all countries
-        function show_countries(selected_shop_id){
-            $.ajax({
-                type  : 'ajax',
-                url   : '<?php echo site_url('product_cont/shop_list')?>',
-                async : true,
-                dataType : 'json',
-                success : function(data){
-
-                    var html = '<select name="shop_name" id="shop_select_box"  class="form-control">';
-                    var i;
-                    for (i = 0; i < data.length; i++) {
-                        var selected = "";
-                        if(data[i].shop_id == selected_shop_id) {
-                            selected = "selected";
-                        }
-                        html += '<option value="'+data[i].shop_id+'" '+selected+'>' + data[i].shop_name + '</option>';
-                    }
-                    html += '</select>';
-                    $('#shop_list_dropdown').html(html);
-
-                    $("#shop_select_box").on('change',function(){
-                        var shop_id = $(this).val();
-                        show_shops_products(shop_id);
-                    });
-                }
-
-            });
-        }
-
-        //function show products of selected shops on change
-        function show_countries_cities(shop_id){
-            $.ajax({
-                type : "POST",
-                url   : '<?php echo site_url('promotion_cont/get_products_by_shop')?>',
-                data: {shop_id:shop_id},
-                dataType : 'json',
-                success : function(data){
-                    var html = '';
-                    for (var i = 0; i < data.length; i++) {
-                        html += '<option value="'+data[i].product_id+'">' + data[i].product_name + '</option>';
-                    }
-                    $('#shop_products').html(html);
-                }
-
-            });
-        }
-
-        //function show all products
-        function show_products(shop_id,selected_product_id){
-            $.ajax({
-                type  : 'POST',
-                url   : '<?php echo site_url('promotion_cont/get_products_by_shop')?>',
-                data : {shop_id:shop_id},
-                dataType : 'json',
-                success : function(data){
-
-                    var html = '<select name="product_name" id="shop_products"  class="form-control">';
-                    var i;
-                    for (i = 0; i < data.length; i++) {
-                        var selected = "";
-                        if(data[i].product_id == selected_product_id) {
-                            selected = "selected";
-                        }
-                        html += '<option value="'+data[i].product_id+'" '+selected+'>' + data[i].product_name + '</option>';
-                    }
-                    html += '</select>';
-                    $('#product_list_dropdown').html(html);
-                }
-
-            });
-        }
-
-
         //function show all shops
         function show_shops(){
             $.ajax({
@@ -239,7 +158,7 @@
                             '<td>'+activeTxt+'</td>'+
                             '<td>'+data[i].user_name+'</td>'+
                             '<td style="text-align:right;">'+
-                            '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-shop_id="'+data[i].shop_id+'" data-shop_name="'+data[i].shop_name+'" data-shop_address="'+data[i].shop_address+'" data-country_name="'+data[i].country_name+'" data-city_name="'+data[i].city_name+'" data-map_location="'+data[i].map_location+'" data-is_active="'+data[i].is_active+'">Edit</a>'+' '+
+                            '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-shop_id="'+data[i].shop_id+'" data-shop_name="'+data[i].shop_name+'" data-shop_address="'+data[i].shop_address+'" data-country_id="'+data[i].country_id+'" data-city_id="'+data[i].city_id+'" data-map_location="'+data[i].map_location+'" data-is_active="'+data[i].is_active+'">Edit</a>'+' '+
                             '<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-shop_id="'+data[i].shop_id+'">Delete</a>'+
                             '</td>'+
                             '</tr>';
@@ -250,6 +169,80 @@
             });
         }
 
+        //function show all countries
+        function show_countries(selected_country_id){
+            $.ajax({
+                type  : 'ajax',
+                url   : '<?php echo site_url('shop_cont/country_list')?>',
+                async : true,
+                dataType : 'json',
+                success : function(data){
+
+                    var html = '<select name="country_name" id="country_select_box"  class="form-control">';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        var selected = "";
+                        if(data[i].country_id == selected_country_id) {
+                            selected = "selected";
+                        }
+                        html += '<option value="'+data[i].country_id+'" '+selected+'>' + data[i].country_name + '</option>';
+                    }
+                    html += '</select>';
+                    $('#country_list_dropdown').html(html);
+
+                    $("#country_select_box").on('change',function(){
+                        var country_id = $(this).val();
+                        show_countries_cities(country_id);
+                    });
+                }
+
+            });
+        }
+
+        //function show cities of selected countries on change
+        function show_countries_cities(country_id){
+            $.ajax({
+                type : "POST",
+                url   : '<?php echo site_url('shop_cont/get_cities_by_country')?>',
+                data: {country_id:country_id},
+                dataType : 'json',
+                success : function(data){
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        html += '<option value="'+data[i].city_id+'">' + data[i].city_name + '</option>';
+                    }
+                    $('#shop_cities').html(html);
+                }
+
+            });
+        }
+
+        //function show all cities
+        function show_cities(country_id,selected_city_id){
+            $.ajax({
+                type  : 'POST',
+                url   : '<?php echo site_url('shop_cont/get_cities_by_country')?>',
+                data : {country_id:country_id},
+                dataType : 'json',
+                success : function(data){
+
+                    var html = '<select name="city_name" id="shop_cities"  class="form-control">';
+                    var i;
+                    for (i = 0; i < data.length; i++) {
+                        var selected = "";
+                        if(data[i].city_id == selected_city_id) {
+                            selected = "selected";
+                        }
+                        html += '<option value="'+data[i].city_id+'" '+selected+'>' + data[i].city_name + '</option>';
+                    }
+                    html += '</select>';
+                    $('#city_list_dropdown').html(html);
+                }
+
+            });
+        }
+
+
         //get data for update record
         $('#show_data').on('click','.item_edit',function(){
             var shop_id                  = $(this).data('shop_id');
@@ -259,8 +252,8 @@
             var city_id                  = $(this).data('city_id');
             var map_location             = $(this).data('map_location');
 
-            // show_shops(shop_id);
-            // show_products(shop_id,product_id);
+            show_countries(country_id);
+            show_cities(country_id,city_id);
 
             $('#model_edit').modal('show');
             $('[name="shop_id_edit"]').val(shop_id);
@@ -277,33 +270,33 @@
 
         //update record to database
         $('#btn_update').on('click',function(){
-            var promotion_id                  = $('#promotion_id_edit').val();
-            var promotion_description         = $('#promotion_description_edit').val();
-            var startDate                     = $('#promotion_startDate_edit').val();
-            var endDate                       = $('#promotion_endDate_edit').val();
-            var shop_id_fk                    = $('[name="shop_name"]').val();
-            var product_id_fk                 = $('[name="product_name"]').val();
-            var status         = 0;
+            var shop_id           = $('#shop_id_edit').val();
+            var shop_name         = $('#shop_name_edit').val();
+            var shop_address      = $('#shop_address_edit').val();
+            var country_id_fk     = $('[name="country_name"]').val();
+            var city_id_fk        = $('[name="city_name"]').val();
+            var map_location      = $('#shop_location_edit').val();
+            var status            = 0;
 
-            if($('#promotion_status_edit').is(':checked')) {
+            if($('#shop_status_edit').is(':checked')) {
                 status = 1;
             }
 
             $.ajax({
                 type : "POST",
-                url  : "<?php echo site_url('promotion_cont/promotion_update')?>",
+                url  : "<?php echo site_url('shop_cont/shop_update')?>",
                 dataType : "JSON",
-                data : {promotion_id:promotion_id, promotion_description:promotion_description, startDate:startDate, endDate:endDate, status:status, shop_id_fk:shop_id_fk, product_id_fk:product_id_fk },
+                data : {shop_id:shop_id, shop_name:shop_name, shop_address:shop_address, country_id_fk:country_id_fk, city_id_fk:city_id_fk, map_location:map_location, status:status },
                 success: function(data){
-                    $('[name="promotion_id_edit"]').val("");
-                    $('[name="promotion_description_edit"]').val("");
-                    $('[name="promotion_startDate_edit"]').val("");
-                    $('[name="promotion_endDate_edit"]').val("");
-                    $('[name="promotion_status_edit"]').val("");
+                    $('[name="shop_id_edit"]').val("");
+                    $('[name="shop_name_edit"]').val("");
+                    $('[name="shop_address_edit"]').val("");
+                    $('[name="shop_location_edit"]').val("");
+                    $('[name="shop_status_edit"]').val("");
 
                     $('#model_edit').modal('hide');
 
-                    show_promotion();
+                    show_shops();
                 }
             });
             return true;

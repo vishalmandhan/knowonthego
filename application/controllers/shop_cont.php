@@ -22,21 +22,28 @@ class shop_cont extends CI_Controller {
             $this->form_validation->set_rules('map_location', 'Location', 'required');
 
             if ($this->form_validation->run() == FALSE) {
-
+                // errors show on form
             } else {
 
-                $user_status = ($this->input->post('status')) ? 1 : 0;
-                $user_data = array(
+                $user_id = 0;
+                if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
+                    $user_id = $this->input->post('shop_users');
+                } else {
+                    $user_id = $_SESSION['user_login_data']['user_id'];
+                }
+
+                $shop_status = ($this->input->post('status')) ? 1 : 0;
+                $shop_data = array(
                     'shop_name' => $this->input->post('shop_name'),
                     'shop_address' => $this->input->post('shop_address'),
                     'fk_country_id' => $this->input->post('shop_country'),
                     'fk_city_id' => $this->input->post('shop_city'),
                     'map_location' => $this->input->post('map_location'),
-                    'fk_user_id' => $this->input->post('shop_users'),
-                    'is_active' => $user_status
+                    'fk_user_id' => $user_id,
+                    'is_active' => $shop_status
                 );
 
-                $check_success = $this->shop_model->insert_shop($user_data);
+                $check_success = $this->shop_model->insert_shop($shop_data);
                 if (!$check_success) {
                     $data['db_error'] = "Record already exist/DB error";
                 } else {
@@ -112,11 +119,35 @@ class shop_cont extends CI_Controller {
     }
 
     function get_cities_by_country() {
-        $country_id = $this->input->post('country');
+        $country_id = $this->input->post('country_id');
         if(empty($country_id)) {
             return false;
         }
         $data = $this->shop_model->get_cities_by_country($country_id);
+        echo json_encode($data);
+    }
+
+    public function country_list(){
+        $data = $this->shop_model->get_countries();
+        echo json_encode($data);
+    }
+
+
+    public function shop_update(){
+
+        $shop_id = $this->input->post('shop_id');
+        $shop_name = $this->input->post('shop_name');
+        $shop_address = $this->input->post('shop_address');
+        $country_id = $this->input->post('country_id_fk');
+        $city_id = $this->input->post('city_id_fk');
+        $map_location = $this->input->post('map_location');
+        $is_active = $this->input->post('status');
+
+//        if(empty($promotion_id) || empty($promotion_description) || empty($startDate) || empty($endDate)) {
+//            return false;
+//        }
+
+        $data=$this->shop_model->update_shop($shop_id, $shop_name, $shop_address, $country_id, $city_id, $map_location, $is_active);
         echo json_encode($data);
     }
 
