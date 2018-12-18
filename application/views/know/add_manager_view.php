@@ -26,19 +26,19 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 text-right control-label col-form-label">Full Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" placeholder="Enter Name ">
+                            <input type="text" class="form-control" name="name" placeholder="Enter Name" required  >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="username" class="col-sm-3 text-right control-label col-form-label">Username</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                            <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="password" class="col-sm-3 text-right control-label col-form-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="password" placeholder="Enter Password">
+                            <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
                         </div>
                     </div>
 
@@ -46,22 +46,21 @@
                         <label for="password" class="col-sm-3 text-right control-label col-form-label">Confirm
                             Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="confirm_password"
-                                   placeholder="Enter Password">
+                            <input type="password" class="form-control" name="confirm_password" placeholder="Enter Password" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email" class="col-sm-3 text-right control-label col-form-label">Email
                             Address</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="email" placeholder="Enter Email Address">
+                            <input type="text" class="form-control" name="email" placeholder="Enter Email Address" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="select user" class="col-sm-3 text-right control-label col-form-label">Select
                             Type</label>
                         <div class="col-sm-9">
-                            <select name="user_type" class="form-control">
+                            <select name="user_type" class="form-control" required>
                                 <option value="">Select Type</option>
                                 <?php foreach ($user_types as $user_type) { ?>
                                     <option value="<?= $user_type['user_type_id'] ?>"><?= $user_type['user_type'] ?></option>

@@ -59,7 +59,12 @@ class product_cont extends CI_Controller {
                 $upload_error = $this->upload->display_errors();
             }
             $data = $this->upload->data();
-            $this->product_model->insert_image_path($product_id_new,$filename.$data['file_ext']);
+            $check_success= $this->product_model->insert_image_path($product_id_new,$filename.$data['file_ext']);
+            if (!$check_success) {
+                $data['db_error'] = "Record already exist/DB error";
+            } else {
+                $data['db_success'] = "Record Insert Successfully";
+            }
 
         }
         $user_session['session_data'] = $this->session->userdata('user_login_data');

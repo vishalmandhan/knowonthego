@@ -23,23 +23,22 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="shop_name" class="col-sm-3 text-right control-label col-form-label">Shop
-                            Name</label>
+                        <label for="shop_name" class="col-sm-3 text-right control-label col-form-label">Shop Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="shop_name" placeholder="Enter Shop Name">
+                            <input type="text" class="form-control" name="shop_name" placeholder="Enter Shop Name" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="shop_address" class="col-sm-3 text-right control-label col-form-label">Shop
                             Address</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="shop_address" placeholder="Enter Shop Address">
+                            <input type="text" class="form-control" name="shop_address" placeholder="Enter Shop Address" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="select country" class="col-sm-3 text-right control-label col-form-label">Select Country</label>
                         <div class="col-sm-9">
-                            <select id="country_select_option" name="shop_country" class="form-control">
+                            <select id="country_select_option" name="shop_country" class="form-control" required>
                                 <option value="">Select Country</option>
                                 <?php foreach ($countries as $country) { ?>
                                     <option value="<?= $country['country_id'] ?>"><?= $country['country_name'] ?></option>
@@ -52,10 +51,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="map_location" class="col-sm-3 text-right control-label col-form-label">Map
-                            Location</label>
+                        <label for="map_location" class="col-sm-3 text-right control-label col-form-label">Map Location</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="map_location" placeholder="Enter Shop Location">
+                            <input type="text" class="form-control" name="map_location" placeholder="Enter Shop Location" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -68,7 +66,7 @@
                     <div class="form-group row">
                         <label for="select user" class="col-sm-3 text-right control-label col-form-label">Select User</label>
                         <div class="col-sm-9">
-                            <select name="shop_users" class="form-control">
+                            <select name="shop_users" class="form-control" required>
                                 <option value="">Select User</option>
                                 <?php foreach ($users as $user) { ?>
                                     <option value="<?= $user['user_id'] ?>"><?= $user['user_name'] ?></option>
@@ -92,7 +90,6 @@
         </div>
         <div class="col-md-6">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8613.933139744011!2d67.02768743301463!3d24.80440171650946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33d099d178ffb%3A0x5a4f572c3d002126!2sOutfitters!5e0!3m2!1sen!2s!4v1543250792720" width="500" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
-
         </div>
     </div>
 </div>
@@ -105,7 +102,7 @@
         show_cities(country_id);
     });
 
-    //function show products of selected shops on change
+    //function show cities of selected countries on change
     function show_cities(country_id){
         $.ajax({
             type : "POST",
@@ -113,7 +110,7 @@
             data: {country:country_id},
             dataType : 'json',
             success : function(data){
-                var html = '<select name="shop_city" class="form-control">';
+                var html = '<select name="shop_city" class="form-control" required>';
                 for (var i = 0; i < data.length; i++) {
                     html += '<option value="'+data[i].city_id+'">' + data[i].city_name + '</option>';
                 }

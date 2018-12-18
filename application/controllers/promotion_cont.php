@@ -38,7 +38,12 @@ class promotion_cont extends CI_Controller {
                     'status' => $promotion_status
                 );
 
-                $this->promotion_model->insert_promotion($promotion_data);
+                $check_success = $this->promotion_model->insert_promotion($promotion_data);
+                if (!$check_success) {
+                    $data['db_error'] = "Record already exist/DB error";
+                } else {
+                    $data['db_success'] = "Record Insert Successfully";
+                }
             }
         }
 

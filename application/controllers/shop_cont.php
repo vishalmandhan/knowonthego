@@ -97,6 +97,9 @@ class shop_cont extends CI_Controller {
 
         //$config['center'] = 'Karachi , Pakistan';
         $config['zoom'] = "auto";
+        $config['sensor'] = "TRUE";
+        $config['places'] = "TRUE";
+        $config['map_type'] = "ROADMAP";
         $config['trafficOverlay'] = "TRUE";
         $this->googlemaps->initialize($config);
 
@@ -119,6 +122,15 @@ class shop_cont extends CI_Controller {
     }
 
     function get_cities_by_country() {
+        $country_id = $this->input->post('country');
+        if(empty($country_id)) {
+            return false;
+        }
+        $data = $this->shop_model->get_cities_by_country($country_id);
+        echo json_encode($data);
+    }
+
+    function get_city_by_country() {
         $country_id = $this->input->post('country_id');
         if(empty($country_id)) {
             return false;
@@ -133,6 +145,7 @@ class shop_cont extends CI_Controller {
     }
 
 
+
     public function shop_update(){
 
         $shop_id = $this->input->post('shop_id');
@@ -143,9 +156,9 @@ class shop_cont extends CI_Controller {
         $map_location = $this->input->post('map_location');
         $is_active = $this->input->post('status');
 
-//        if(empty($promotion_id) || empty($promotion_description) || empty($startDate) || empty($endDate)) {
-//            return false;
-//        }
+        if(empty($shop_id) || empty($shop_name) || empty($shop_address) || empty($country_id) || empty($city_id) || empty($map_location) || empty($is_active))  {
+            return false;
+        }
 
         $data=$this->shop_model->update_shop($shop_id, $shop_name, $shop_address, $country_id, $city_id, $map_location, $is_active);
         echo json_encode($data);

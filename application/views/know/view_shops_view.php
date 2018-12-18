@@ -203,7 +203,7 @@
         function show_countries_cities(country_id){
             $.ajax({
                 type : "POST",
-                url   : '<?php echo site_url('shop_cont/get_cities_by_country')?>',
+                url   : '<?php echo site_url('shop_cont/get_city_by_country')?>',
                 data: {country_id:country_id},
                 dataType : 'json',
                 success : function(data){
@@ -221,7 +221,7 @@
         function show_cities(country_id,selected_city_id){
             $.ajax({
                 type  : 'POST',
-                url   : '<?php echo site_url('shop_cont/get_cities_by_country')?>',
+                url   : '<?php echo site_url('shop_cont/get_city_by_country')?>',
                 data : {country_id:country_id},
                 dataType : 'json',
                 success : function(data){
