@@ -33,7 +33,7 @@ class forgotPass_model extends CI_Model
         $row = $query->result_array();
         if ($query->num_rows() > 0) {
             $passwordplain = "";
-            $passwordplain = rand(100000, 10000000);
+            $passwordplain = md5(rand(100000, 10000000));
             $newpass['password'] = ($passwordplain);
             $this->db->where('user_email', $email);
             $this->db->update('users', $newpass);

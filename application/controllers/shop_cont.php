@@ -65,7 +65,7 @@ class shop_cont extends CI_Controller {
 
         $marker = array();
         $marker['draggable'] = TRUE;
-        $marker['ondragend'] = 'alert(\'You just clicked at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';
+        $marker['ondragend'] = '$("#map_location").val(event.latLng.lat() + \', \' + event.latLng.lng())';
         $marker['position'] = '24.946218, 67.005615';
         $this->googlemaps->add_marker($marker);
 
@@ -88,9 +88,31 @@ class shop_cont extends CI_Controller {
 
     public function view_shops()
     {
+        // add shop: Add location in database (map)
+        $this->load->library('googlemaps');
+
+        $config['center'] = '24.946218, 67.005615'; //Focus On
+        $config['zoom'] = "10";
+        $config['sensor'] = TRUE;
+        $config['places'] = TRUE;
+        $config['map_height'] = '250';
+        $config['map_width'] = '770';
+        $config['map_type'] = 'ROADMAP';
+        // $config['trafficOverlay'] = "TRUE";
+        $this->googlemaps->initialize($config);
+
+        $marker = array();
+        $marker['draggable'] = TRUE;
+        $marker['ondragend'] = '$("#shop_location_edit").val(event.latLng.lat() + \', \' + event.latLng.lng());';
+        $marker['position'] = '24.946218, 67.005615';
+        $this->googlemaps->add_marker($marker);
+
+        $dataMap = array();
+        $dataMap['map'] = $this->googlemaps->create_map();
+
         $user_session['session_data'] = $this->session->userdata('user_login_data');
         $this->load->view('includes/dashboard_header', $user_session);
-        $this->load->view('know/view_shops_view');
+        $this->load->view('know/view_shops_view' , $dataMap);
         $this->load->view('includes/dashboard_footer');
     }
 

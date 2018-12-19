@@ -22,13 +22,13 @@
             <table class="table table-striped" id="mydata">
                 <thead>
                 <tr>
-                    <th width="70">Name</th>
-                    <th width="90">Address</th>
-                    <th width="60">Country</th>
+                    <th width="110">Name</th>
+                    <th width="220">Address</th>
+                    <th width="90">Country</th>
                     <th width="50">City</th>
-                    <th width="220">Location</th>
+<!--                    <th width="220">Location</th>-->
                     <th width="50">Status</th>
-                    <th width="50">Users</th>
+                    <th width="120">Users</th>
                     <th style="text-align: right;">Actions</th>
                 </tr>
                 </thead>
@@ -86,6 +86,12 @@
                         <label class="col-md-2 col-form-label">Status</label>
                         <div class="col-md-1">
                             <input type="checkbox" name="shop_status_edit" id="shop_status_edit" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <?php echo $map['js']; ?>
+                        <div class="col-md-6">
+                            <?php echo $map['html']; ?>
                         </div>
                     </div>
                 </div>
@@ -154,7 +160,7 @@
                             '<td>'+data[i].shop_address+'</td>'+
                             '<td>'+data[i].country_name+'</td>'+
                             '<td>'+data[i].city_name+'</td>'+
-                            '<td>'+data[i].map_location+'</td>'+
+                            // '<td>'+data[i].map_location+'</td>'+
                             '<td>'+activeTxt+'</td>'+
                             '<td>'+data[i].user_name+'</td>'+
                             '<td style="text-align:right;">'+

@@ -56,6 +56,7 @@
                         <label for="image" class="col-md-2 col-form-label">Upload Image</label>
                         <div class="col-sm-10">
                             <input type="file" class="form-control" name="product_image">
+                            <input type="hidden" class="form-control" name="image_name">
                             <div id="product_image"></div>
                         </div>
                     </div>
@@ -168,7 +169,7 @@
                     var i;
                     for(i=0; i<data.length; i++){
                         html += '<tr>'+
-                            '<td><img src="<?php echo base_url() ?>assets/product_images/'+data[i].product_image+'" width="70px"/></td>'+
+                            '<td><img src="<?php echo base_url() ?>assets/product_images/'+data[i].product_image+'?<?php echo microtime(true);?>" width="70px"/></td>'+
                             '<td>'+data[i].product_name+'</td>'+
                             '<td>'+data[i].product_description+'</td>'+
                             '<td>'+data[i].product_price+'</td>'+
@@ -201,6 +202,7 @@
             $('[name="product_name_edit"]').val(product_name);
             $('[name="product_description_edit"]').val(product_description);
             $('[name="product_price_edit"]').val(product_price);
+            $('[name="image_name"]').val(product_image);
             $('#product_image').html('<img src="<?php echo base_url() ?>assets/product_images/'+product_image+'" width="70px" />')
 
         });
@@ -229,7 +231,8 @@
                     $('[name="product_name_edit"]').val("");
                     $('[name="product_description_edit"]').val("");
                     $('[name="product_price_edit"]').val("");
-                    $('[name="product_image_edit"]').attr('src' , data);
+                    $('[name="product_image_edit"]').val("");
+                    $('[name="image_name"]').val("");
                     // $('[name="product_image_edit"]').val("");
                     //$('#shop_list_dropdown').html("");
                     $('#model_edit').modal('hide');

@@ -90,6 +90,9 @@ class product_cont extends CI_Controller {
 
     public function product_update(){
 
+        $abspath=$_SERVER['DOCUMENT_ROOT'].'/knowonthego/';
+
+        $image_name = $this->input->post('image_name');
         $product_id = $this->input->post('product_id_edit');
         $product_name = $this->input->post('product_name_edit');
         $product_description = $this->input->post('product_description_edit');
@@ -102,6 +105,13 @@ class product_cont extends CI_Controller {
         }
 
         $filename = 'product_'.$product_id;
+
+        $file_path = $abspath."assets/product_images/".$image_name;
+
+        $this->load->helper('file');
+        if(file_exists($file_path)){
+            unlink($file_path);
+        }
 
         $config['upload_path']   = 'assets/product_images';
         $config['allowed_types'] = 'gif|jpg|png|jpeg';

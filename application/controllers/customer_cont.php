@@ -93,4 +93,27 @@ class customer_cont extends CI_Controller {
         $this->load->view('know/customer_map' , $data);
         $this->load->view('includes/dashboard_footer');
     }
+
+    public function view_customer_subscription()
+    {
+        $user_session['session_data'] = $this->session->userdata('user_login_data');
+        $this->load->view('includes/dashboard_header', $user_session);
+        $this->load->view('know/view_customer_subscription');
+        $this->load->view('includes/dashboard_footer');
+    }
+
+    public function customer_subscription_data(){
+        $data = $this->customer_model->customer_subscription_list();
+        echo json_encode($data);
+    }
+
+    public function customer_subscribe_delete(){
+
+        $customer_subscribe_id=$this->input->post('customer_subscribe_id');
+
+        if(empty($customer_subscribe_id)){ return false ;}
+
+        $data=$this->customer_model->delete_customer_subscribe($customer_subscribe_id);
+        echo json_encode($data);
+    }
 }

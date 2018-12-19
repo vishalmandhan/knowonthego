@@ -316,6 +316,10 @@
                                                         class="sidebar-link"><i
                                             class="mdi mdi-note-outline"></i><span
                                             class="hide-menu">Customers Location </span></a></li>
+                            <li class="sidebar-item"><a href="<?php echo site_url(); ?>/customer_cont/view_customer_subscription"
+                                                        class="sidebar-link"><i
+                                            class="mdi mdi-note-outline"></i><span
+                                            class="hide-menu">Customers Subscription </span></a></li>
                         </ul>
                     </li>
                     <?php } ?>

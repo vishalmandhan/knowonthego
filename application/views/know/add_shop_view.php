@@ -53,7 +53,7 @@
                     <div class="form-group row">
                         <label for="map_location" class="col-sm-3 text-right control-label col-form-label">Map Location</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="map_location" placeholder="Enter Shop Location" required>
+                            <input type="text" class="form-control" name="map_location" id="map_location" placeholder="Select Shop Location From Map" required>
                         </div>
                     </div>
                     <div class="form-group row">

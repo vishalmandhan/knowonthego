@@ -68,5 +68,22 @@ class customer_model extends CI_Model
         return $return;
     }
 
+    public function customer_subscription_list()
+    {
+        $query = $this->db->select('cs.customer_subscribe_id , cs.dateTime,s.shop_id,s.shop_name ,c.customer_id,c.customer_name')
+            ->from('customer_subscribe as cs')
+            ->join('shop as s', 'cs.fk_shop_id = s.shop_id', 'LEFT')
+            ->join('customer as c', 'cs.fk_customer_id = c.customer_id', 'LEFT')
+            ->get();
+        return $query->result();
+    }
+
+    function delete_customer_subscribe($customer_subscribe_id)
+    {
+        $this->db->where('customer_subscribe_id', $customer_subscribe_id);
+        $result = $this->db->delete('customer_subscribe');
+        return $result;
+    }
+
 }
 ?>

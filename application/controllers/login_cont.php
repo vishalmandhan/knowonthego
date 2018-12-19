@@ -156,18 +156,10 @@ class login_cont extends CI_Controller
                     $this->session->set_flashdata("error", "Old Password Does Not Match. Try Again");
                     redirect('login_cont/change_password');
                 }
-
-
             }
         }
 
         $this->load->view('know/change_password');
     }
-
-
-//    public function newPassword()
-//    {
-//        $this->load->view('know/new_password');
-//    }
 
 }
