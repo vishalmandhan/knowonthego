@@ -228,17 +228,17 @@
                     <?php if ($session_data['is_admin']) { ?>
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                                     href="javascript:void(0)" aria-expanded="false"><i
-                                        class="mdi mdi-account-circle"></i><span class="hide-menu">Shop Manager </span></a>
+                                        class="mdi mdi-account-circle"></i><span class="hide-menu">Shop User </span></a>
 
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="<?php echo site_url(); ?>/user_cont/add_manager"
                                                             class="sidebar-link"><i
                                                 class="mdi mdi-note-outline"></i><span
-                                                class="hide-menu"> Add Manager </span></a></li>
+                                                class="hide-menu"> Add User </span></a></li>
                                 <li class="sidebar-item"><a href="<?php echo site_url(); ?>/user_cont/view_manager"
                                                             class="sidebar-link"><i
                                                 class="mdi mdi-note-outline"></i><span
-                                                class="hide-menu"> View Manager </span></a>
+                                                class="hide-menu"> View User </span></a>
                                 </li>
 
                             </ul>
@@ -291,12 +291,12 @@
                     </li>
                     <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                                 href="javascript:void(0)" aria-expanded="false"><i
-                                    class="mdi mdi-map-marker"></i><span class="hide-menu">Location </span></a>
+                                    class="mdi mdi-map-marker"></i><span class="hide-menu"> Shop Location </span></a>
                         <ul aria-expanded="false" class="collapse  first-level">
                             <li class="sidebar-item"><a
                                         href="<?php echo site_url(); ?>/shop_cont/view_shop_location"
                                         class="sidebar-link"><i
-                                            class="mdi mdi-note-outline"></i><span class="hide-menu"> View Shop </span></a>
+                                            class="mdi mdi-note-outline"></i><span class="hide-menu"> View Shops Location </span></a>
                             </li>
                             <!--                            <li class="sidebar-item"><a href="-->
                             <?php //echo site_url(); ?><!--/dashboard_cont/view_all_shops_locations" class="sidebar-link"><i-->
@@ -304,7 +304,21 @@
                             <!--                                            class="hide-menu"> View All Shops </span></a></li>-->
                         </ul>
                     </li>
-
+                    <?php if ($session_data['is_admin']) { ?>
+                    <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
+                                    class="mdi mdi-account-multiple"></i><span class="hide-menu">Customer Detail </span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+                            <li class="sidebar-item"><a href="<?php echo site_url(); ?>/customer_cont/view_customer"
+                                                        class="sidebar-link"><i
+                                            class="mdi mdi-note-outline"></i><span
+                                            class="hide-menu"> View Customers </span></a></li>
+                            <li class="sidebar-item"><a href="<?php echo site_url(); ?>/customer_cont/view_customer_location"
+                                                        class="sidebar-link"><i
+                                            class="mdi mdi-note-outline"></i><span
+                                            class="hide-menu">Customers Location </span></a></li>
+                        </ul>
+                    </li>
+                    <?php } ?>
 
                     <li class="sidebar-item"><a href="<?php echo site_url(); ?>/dashboard_cont/calendar"
                                                 class="sidebar-link"><i class="mdi mdi-calendar-check"></i><span

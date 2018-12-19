@@ -36,8 +36,7 @@ class login_cont extends CI_Controller
                 }
 
                 $this->load->model('login_model');
-                //md5 removed from below line in password param
-                $user_data = $this->login_model->login($username, $password);
+                $user_data = $this->login_model->login($username, md5($password));
 
                 if ($user_data) {
 
@@ -145,7 +144,7 @@ class login_cont extends CI_Controller
                 $confirm_password = $this->input->post('confirm_password');
 
 
-                $result = $this->changePass_model->updatePassword($user_session['user_email'] ,$old_password, $new_password);
+                $result = $this->changePass_model->updatePassword($user_session['user_email'] ,md5($old_password), md5($new_password));
 
                 if ($result == TRUE) {
                     $this->session->set_flashdata("success", "Congrats. Password Updated Successfully. ");

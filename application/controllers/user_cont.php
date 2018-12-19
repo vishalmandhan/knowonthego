@@ -21,10 +21,10 @@ class user_cont extends CI_Controller {
         }
 
         if ($_POST) {
-            // validations first name is comes from the form name not db names
+            // validations first names are from  fields names not db names
             $this->form_validation->set_rules('name', 'Full Name', 'trim|required|min_length[3]');
             $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
-            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.user_email]');
             $this->form_validation->set_rules('user_type', 'User Type', 'trim|required');
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
             $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]|min_length[6]');
@@ -37,8 +37,7 @@ class user_cont extends CI_Controller {
                 $user_data = array(
                     'user_name' => $this->input->post('name'),
                     'username' => $this->input->post('username'),
-                    //md5 removed from below line
-                    'password' => $this->input->post('password'),
+                    'password' => md5($this->input->post('password')),
                     'user_email' => $this->input->post('email'),
                     'fk_user_type_id' => $this->input->post('user_type'),
                     'is_active' => $user_status

@@ -115,7 +115,7 @@
     $('#mydata').dataTable();
 
     $(document).ready(function(){
-        //call function show all product
+        //call function show all users
         show_user();
 
 

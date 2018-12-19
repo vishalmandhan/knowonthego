@@ -52,6 +52,26 @@ class shop_cont extends CI_Controller {
             }
         }
 
+        // add shop: Add location in database (map)
+        $this->load->library('googlemaps');
+
+        $config['center'] = '24.946218, 67.005615'; //Focus On
+        $config['zoom'] = "10";
+        $config['sensor'] = 'TRUE';
+        $config['places'] = 'TRUE';
+        $config['map_type'] = 'ROADMAP';
+            //$config['onclick'] = 'createMarker_map({ map: map, position:event.latLng });';
+        $config['onclick'] = 'alert(\'You just clicked at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';
+        // $config['trafficOverlay'] = "TRUE";
+        $this->googlemaps->initialize($config);
+
+        $marker = array();
+        $marker['position'] = '24.946218, 67.005615';
+        $this->googlemaps->add_marker($marker);
+
+        $dataMap = array();
+        $dataMap['map'] = $this->googlemaps->create_map();
+
         $user_session['session_data'] = $this->session->userdata('user_login_data');
         $this->load->view('includes/dashboard_header', $user_session);
         $data['countries'] = $this->shop_model->get_countries();
@@ -60,7 +80,8 @@ class shop_cont extends CI_Controller {
         if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
             $data['users'] = $this->shop_model->get_users();
         }
-        $this->load->view('know/add_shop_view' , $data);
+        $mergeView = array_merge($data,$dataMap);
+        $this->load->view('know/add_shop_view' , $mergeView);
         $this->load->view('includes/dashboard_footer');
 
     }
@@ -95,12 +116,14 @@ class shop_cont extends CI_Controller {
 
         $this->load->model('shop_model', '', TRUE);
 
-        //$config['center'] = 'Karachi , Pakistan';
-        $config['zoom'] = "auto";
-        $config['sensor'] = "TRUE";
-        $config['places'] = "TRUE";
-        $config['map_type'] = "ROADMAP";
-        $config['trafficOverlay'] = "TRUE";
+        $config['center'] = '24.946218, 67.005615'; //Focus On
+        $config['zoom'] = "10";
+        $config['sensor'] = 'TRUE';
+        $config['places'] = 'TRUE';
+        $config['map_type'] = 'ROADMAP';
+      //  $config['onclick'] = 'createMarker_map({ map: map, position:event.latLng });';
+      //  $config['onclick'] = 'alert(\'You just clicked at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';
+        //// $config['trafficOverlay'] = "TRUE";
         $this->googlemaps->initialize($config);
 
         $coords = $this->shop_model->get_shop_location();

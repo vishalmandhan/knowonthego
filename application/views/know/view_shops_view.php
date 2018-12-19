@@ -165,7 +165,6 @@
                     }
                     $('#show_data').html(html);
                 }
-
             });
         }
 
@@ -195,7 +194,6 @@
                         show_countries_cities(country_id);
                     });
                 }
-
             });
         }
 
@@ -213,7 +211,6 @@
                     }
                     $('#shop_cities').html(html);
                 }
-
             });
         }
 
@@ -242,7 +239,6 @@
             });
         }
 
-
         //get data for update record
         $('#show_data').on('click','.item_edit',function(){
             var shop_id                  = $(this).data('shop_id');
@@ -265,7 +261,6 @@
             } else {
                 $('[name="shop_status_edit"]').prop("checked",false);
             }
-
         });
 
         //update record to database
