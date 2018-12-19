@@ -60,12 +60,12 @@ class shop_cont extends CI_Controller {
         $config['sensor'] = 'TRUE';
         $config['places'] = 'TRUE';
         $config['map_type'] = 'ROADMAP';
-            //$config['onclick'] = 'createMarker_map({ map: map, position:event.latLng });';
-        $config['onclick'] = 'alert(\'You just clicked at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';
         // $config['trafficOverlay'] = "TRUE";
         $this->googlemaps->initialize($config);
 
         $marker = array();
+        $marker['draggable'] = TRUE;
+        $marker['ondragend'] = 'alert(\'You just clicked at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';
         $marker['position'] = '24.946218, 67.005615';
         $this->googlemaps->add_marker($marker);
 
@@ -121,8 +121,7 @@ class shop_cont extends CI_Controller {
         $config['sensor'] = 'TRUE';
         $config['places'] = 'TRUE';
         $config['map_type'] = 'ROADMAP';
-      //  $config['onclick'] = 'createMarker_map({ map: map, position:event.latLng });';
-      //  $config['onclick'] = 'alert(\'You just clicked at: \' + event.latLng.lat() + \', \' + event.latLng.lng());';
+
         //// $config['trafficOverlay'] = "TRUE";
         $this->googlemaps->initialize($config);
 
@@ -130,7 +129,7 @@ class shop_cont extends CI_Controller {
 
         foreach ($coords as $coordinate) {
             $marker = array();
-            $marker['position'] = $coordinate->lat . ',' . $coordinate->lng;
+            $marker['position'] = $coordinate->map_location;
             $marker['title'] = $coordinate->shop_name;
             $this->googlemaps->add_marker($marker);
         }

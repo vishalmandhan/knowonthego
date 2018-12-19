@@ -85,7 +85,7 @@ class shop_model extends CI_Model {
     {
         if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
             $return = array();
-            $this->db->select("lat,lng,shop_name");
+            $this->db->select("map_location,shop_name");
             $this->db->from("shop");
             $query = $this->db->get();
             if ($query->num_rows() > 0) {
@@ -97,7 +97,7 @@ class shop_model extends CI_Model {
         }
         $user_id = $_SESSION['user_login_data']['user_id'];
         $return = array();
-        $query = $this->db->select("s.lat,s.lng,s.shop_name, u.user_id")
+        $query = $this->db->select("s.map_location,s.shop_name, u.user_id")
             ->from("shop as s")
             ->join('users as u', 's.fk_user_id = u.user_id', 'LEFT')
             ->where('u.user_id', (int)$user_id)

@@ -80,7 +80,7 @@ class customer_cont extends CI_Controller {
 
         foreach ($coords as $coordinate) {
             $marker = array();
-            $marker['position'] = $coordinate->lat . ',' . $coordinate->lng;
+            $marker['position'] = $coordinate->customer_location;
             $marker['title'] = $coordinate->customer_name;
             $this->googlemaps->add_marker($marker);
         }
@@ -90,7 +90,7 @@ class customer_cont extends CI_Controller {
 
         $user_session['session_data'] = $this->session->userdata('user_login_data');
         $this->load->view('includes/dashboard_header', $user_session);
-        $this->load->view('know/view_map' , $data);
+        $this->load->view('know/customer_map' , $data);
         $this->load->view('includes/dashboard_footer');
     }
 }

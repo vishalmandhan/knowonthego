@@ -43,7 +43,7 @@ class customer_model extends CI_Model
     {
         if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
             $return = array();
-            $this->db->select("lat,lng,customer_name");
+            $this->db->select("customer_location,customer_name");
             $this->db->from("customer");
             $query = $this->db->get();
             if ($query->num_rows() > 0) {
@@ -55,7 +55,7 @@ class customer_model extends CI_Model
         }
         $user_id = $_SESSION['user_login_data']['user_id'];
         $return = array();
-        $query = $this->db->select("s.lat,s.lng,s.customer_name, u.user_id")
+        $query = $this->db->select("s.customer_location,s.customer_name, u.user_id")
             ->from("customer as s")
             ->join('users as u', 's.fk_user_id = u.user_id', 'LEFT')
             ->where('u.user_id', (int)$user_id)
