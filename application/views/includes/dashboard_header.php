@@ -289,6 +289,7 @@
                                             class="hide-menu"> View Promotion </span></a></li>
                         </ul>
                     </li>
+                    <?php if ($session_data['is_admin']) { ?>
                     <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                                 href="javascript:void(0)" aria-expanded="false"><i
                                     class="mdi mdi-map-marker"></i><span class="hide-menu"> Shop Location </span></a>
@@ -298,12 +299,10 @@
                                         class="sidebar-link"><i
                                             class="mdi mdi-note-outline"></i><span class="hide-menu"> View Shops Location </span></a>
                             </li>
-                            <!--                            <li class="sidebar-item"><a href="-->
-                            <?php //echo site_url(); ?><!--/dashboard_cont/view_all_shops_locations" class="sidebar-link"><i-->
-                            <!--                                            class="mdi mdi-note-outline"></i><span-->
-                            <!--                                            class="hide-menu"> View All Shops </span></a></li>-->
                         </ul>
                     </li>
+                    <?php } ?>
+
                     <?php if ($session_data['is_admin']) { ?>
                     <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i
                                     class="mdi mdi-account-multiple"></i><span class="hide-menu">Customer Detail </span></a>

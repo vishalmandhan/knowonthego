@@ -21,8 +21,8 @@ class product_cont extends CI_Controller {
             $this->form_validation->set_rules('product_name', 'Product Name', 'trim|required|min_length[3]');
             $this->form_validation->set_rules('product_description', 'Description', 'trim|required|min_length[3]');
             $this->form_validation->set_rules('product_price', 'Price', 'trim|required');
-            $this->form_validation->set_rules('product_image', 'Image');
-            $this->form_validation->set_rules('product_shop', 'Shop', 'required');
+            $this->form_validation->set_rules('product_image', 'Image' , 'trim|required');
+            $this->form_validation->set_rules('product_shop', 'Shop', 'trim|required');
 
             $product_id_new = 0;
             // insert product into DB
@@ -33,13 +33,13 @@ class product_cont extends CI_Controller {
                 $product_data = array(
                     'product_name' => $this->input->post('product_name'),
                     'product_description' => $this->input->post('product_description'),
-                    //md5 removed from below line
                     'product_price' => $this->input->post('product_price'),
                     'fk_shop_id' => $this->input->post('product_shop'),
 
                 );
 
                 $product_id_new = $this->product_model->insert_product($product_data);
+
             }
 
             $filename = 'product_'.$product_id_new;
@@ -59,12 +59,14 @@ class product_cont extends CI_Controller {
                 $upload_error = $this->upload->display_errors();
             }
             $data = $this->upload->data();
-            $check_success= $this->product_model->insert_image_path($product_id_new,$filename.$data['file_ext']);
+            $check_success=$this->product_model->insert_image_path($product_id_new,$filename.$data['file_ext']);
             if (!$check_success) {
                 $data['db_error'] = "Record already exist/DB error";
             } else {
                 $data['db_success'] = "Record Insert Successfully";
             }
+
+
 
         }
         $user_session['session_data'] = $this->session->userdata('user_login_data');

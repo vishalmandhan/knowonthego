@@ -15,6 +15,10 @@
                     }
                     ?>
 
+                    <div class="m-t-25 m-b--5 align-center">
+                        <?php echo validation_errors(); ?>
+                    </div>
+
                     <?php echo form_open_multipart('product_cont/add_product', 'class="form-horizontal"')?>
                         <div class="card-body">
                             <h4 class="card-title">Add Product Details</h4>

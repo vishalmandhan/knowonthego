@@ -32,7 +32,6 @@ class promotion_cont extends CI_Controller {
                 $promotion_data = array(
                     'promotion_description' => $this->input->post('promotion_description'),
                     'startDate' => $this->input->post('startDate'),
-                    //md5 removed from below line
                     'endDate' => $this->input->post('endDate'),
                     'fk_product_id' => $this->input->post('promotion_product'),
                     'status' => $promotion_status

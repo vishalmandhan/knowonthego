@@ -8,6 +8,7 @@ class user_cont extends CI_Controller {
 		parent::__construct();
 
         $this->load->model('user_model');
+        $this->load->library('form_validation');
 
     }
 
@@ -21,13 +22,14 @@ class user_cont extends CI_Controller {
         }
 
         if ($_POST) {
+
             // validations first names are from  fields names not db names
             $this->form_validation->set_rules('name', 'Full Name', 'trim|required|min_length[3]');
             $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.user_email]');
             $this->form_validation->set_rules('user_type', 'User Type', 'trim|required');
-            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]|min_length[6]');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[8]');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]|min_length[8]');
 
             if ($this->form_validation->run() == FALSE) {
 
@@ -47,7 +49,7 @@ class user_cont extends CI_Controller {
                 if (!$check_success) {
                     $data['db_error'] = "Record already exist/DB error";
                 } else {
-                    $data['db_success'] = "Record Insert Successfully";
+                    $data['db_success'] = "Record Inserted Successfully";
                 }
             }
         }

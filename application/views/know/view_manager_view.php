@@ -22,7 +22,7 @@
             <table class="table table-striped" id="mydata">
                 <thead>
                 <tr>
-                    <th width="210">Full Name</th>
+                    <th width="180">Full Name</th>
                     <th width="120">UserName</th>
                     <th width="200">Email</th>
                     <th width="80">Status</th>
@@ -112,12 +112,11 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/views/js/dataTables.bootstrap4.js'?>"></script>
 
 <script type="text/javascript">
-    $('#mydata').dataTable();
+
 
     $(document).ready(function(){
         //call function show all users
         show_user();
-
 
         //function show all users
         function show_user(){
@@ -146,6 +145,7 @@
                             '</tr>';
                     }
                     $('#show_data').html(html);
+                    $('#mydata').dataTable();
                 }
 
             });

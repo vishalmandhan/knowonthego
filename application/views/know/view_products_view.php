@@ -126,7 +126,7 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/views/js/dataTables.bootstrap4.js'?>"></script>
 
 <script type="text/javascript">
-    $('#mydata').dataTable();
+
 
     $(document).ready(function(){
          //call function show all product
@@ -152,6 +152,7 @@
                     }
                     html += '</select>';
                     $('#shop_list_dropdown').html(html);
+
                 }
 
             });
@@ -181,6 +182,7 @@
                             '</tr>';
                     }
                     $('#show_data').html(html);
+                    $('#mydata').dataTable();
                 }
 
             });

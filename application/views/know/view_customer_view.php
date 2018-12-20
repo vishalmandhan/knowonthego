@@ -120,14 +120,14 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/views/js/dataTables.bootstrap4.js'?>"></script>
 
 <script type="text/javascript">
-    $('#mydata').dataTable();
+
 
     $(document).ready(function(){
         //call function show all customers
         show_customers();
 
 
-        //function show all users
+        //function show all customers
         function show_customers(){
             $.ajax({
                 type  : 'ajax',
@@ -155,8 +155,8 @@
                             '</tr>';
                     }
                     $('#show_data').html(html);
+                    $('#mydata').dataTable();
                 }
-
             });
         }
 

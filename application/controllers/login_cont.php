@@ -63,7 +63,6 @@ class login_cont extends CI_Controller
             }
         }
 
-
         $this->load->view('know/login_view');
     }
 
@@ -127,14 +126,15 @@ class login_cont extends CI_Controller
 
         if ($_POST) {
             // password field with confirmation field matching
-            $this->form_validation->set_rules('old_password', 'Password', 'required|min_length[6]');
-            $this->form_validation->set_rules('new_password', 'Password', 'required|min_length[6]');
-            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[new_password]|min_length[6]');
-
-            $this->load->model('changePass_model');
+            $this->form_validation->set_rules('old_password', 'Password', 'required|min_length[6]|');
+            $this->form_validation->set_rules('new_password', 'Password', 'required|min_length[8]');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[new_password]|min_length[8]');
 
             if ($this->form_validation->run() == FALSE) {
-                $this->load->view('know/change_password');
+//                echo "<script type='text/javascript'>
+//                alert('PASSWORD MUST BE MINIMUM 8 CHARACTER LONG!!');
+//                </script>";
+//                $this->session->set_flashdata("error", "PASSWORD LENGTH SHOULD BE 8 CHARACTER LONG!!");
             } else {
 
                 $user_session = $this->session->userdata('user_login_data');
@@ -143,14 +143,13 @@ class login_cont extends CI_Controller
                 $new_password = $this->input->post('new_password');
                 $confirm_password = $this->input->post('confirm_password');
 
-
                 $result = $this->changePass_model->updatePassword($user_session['user_email'] ,md5($old_password), md5($new_password));
 
                 if ($result == TRUE) {
-                    $this->session->set_flashdata("success", "Congrats. Password Updated Successfully. ");
+                    $this->session->set_flashdata("success", "Congrats. Password Updated Successfully.");
                     redirect('login_cont/change_password');
                 } else if ($new_password != $confirm_password) {
-                    $this->session->set_flashdata("match_error", "New Password & Confirm Password Does Not Match. ");
+                    $this->session->set_flashdata("match_error", "New Password & Confirm Password Does Not Match.");
                     redirect('login_cont/change_password');
                 } else {
                     $this->session->set_flashdata("error", "Old Password Does Not Match. Try Again");
@@ -158,8 +157,6 @@ class login_cont extends CI_Controller
                 }
             }
         }
-
         $this->load->view('know/change_password');
     }
-
 }

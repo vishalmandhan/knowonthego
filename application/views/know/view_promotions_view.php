@@ -22,10 +22,10 @@
             <table class="table table-striped" id="mydata">
                 <thead>
                 <tr>
-                    <th width="140">Description</th>
+                    <th width="150">Description</th>
                     <th width="90">StartDate</th>
                     <th width="90">EndDate</th>
-                    <th width="80">Status</th>
+                    <th width="50">Status</th>
                     <th width="60">Product</th>
                     <th width="60">Shop</th>
                     <th width="60">User</th>
@@ -130,12 +130,10 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/views/js/dataTables.bootstrap4.js'?>"></script>
 
 <script type="text/javascript">
-    $('#mydata').dataTable();
 
     $(document).ready(function(){
         //call function show all product
         show_promotion();
-
 
         //function show all shops
         function show_shops(selected_shop_id){
@@ -240,6 +238,7 @@
                             '</tr>';
                     }
                     $('#show_data').html(html);
+                    $('#mydata').dataTable();
                 }
 
             });

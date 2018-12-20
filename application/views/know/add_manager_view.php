@@ -13,6 +13,13 @@
                 }
                 ?>
 
+                <div class="m-t-25 m-b--5 align-center">
+                    <?php echo validation_errors(); ?>
+                    <?php if($this->session->flashdata('error')){
+                        ?><div class="alert alert-danger"><?php echo ($this->session->flashdata('error')); ?></div><?php
+                    } ?>
+                </div>
+
                 <?php echo form_open('user_cont/add_manager', 'class="form-horizontal"') ?>
                 <!-- <form class="form-horizontal" method="post"> -->
                 <div class="card-body">

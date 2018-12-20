@@ -14,6 +14,10 @@
                 }
                 ?>
 
+                <div class="m-t-25 m-b--5 align-center">
+                    <?php echo validation_errors(); ?>
+                </div>
+
                 <?php echo form_open('shop_cont/add_shop', 'class="form-horizontal"'); ?>
                 <div class="card-body">
                     <h4 class="card-title">Add Shop Details</h4>

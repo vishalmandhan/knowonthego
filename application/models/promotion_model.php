@@ -18,7 +18,6 @@ class promotion_model extends CI_Model
 
     public function insert_promotion($promotion_data)
     {
-
         try {
             $this->db->set($promotion_data);
             $result = $this->db->insert('promotion');
@@ -37,7 +36,6 @@ class promotion_model extends CI_Model
 
     function promotion_list()
     {
-
         if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {
             $query = $this->db->select('pr.*,s.shop_id,s.shop_name,p.product_id,p.product_name,u.user_id,u.user_name')
                 ->from('promotion as pr')
