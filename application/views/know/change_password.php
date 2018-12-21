@@ -27,10 +27,9 @@
                 } ?>
             </div>
 
-            <div class="m-t-25 m-b--5 align-center">
-                <?php if($this->session->flashdata('match_error')){
-                    ?><div class="alert alert-danger"><?php echo ($this->session->flashdata('match_error')); ?></div><?php
-                } ?>
+
+            <div class="m-t-25 m-b--5 align-center alert-danger" >
+                <?php echo validation_errors(); ?>
             </div>
 
             <!-- Form -->

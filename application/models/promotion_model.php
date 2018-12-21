@@ -33,7 +33,6 @@ class promotion_model extends CI_Model
         return false;
     }
 
-
     function promotion_list()
     {
         if (isset($_SESSION['user_login_data']) && $_SESSION['user_login_data']['is_admin']) {

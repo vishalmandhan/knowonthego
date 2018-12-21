@@ -126,7 +126,7 @@ class login_cont extends CI_Controller
 
         if ($_POST) {
             // password field with confirmation field matching
-            $this->form_validation->set_rules('old_password', 'Password', 'required|min_length[6]|');
+            $this->form_validation->set_rules('old_password', 'Password', 'required');
             $this->form_validation->set_rules('new_password', 'Password', 'required|min_length[8]');
             $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[new_password]|min_length[8]');
 
@@ -147,9 +147,6 @@ class login_cont extends CI_Controller
 
                 if ($result == TRUE) {
                     $this->session->set_flashdata("success", "Congrats. Password Updated Successfully.");
-                    redirect('login_cont/change_password');
-                } else if ($new_password != $confirm_password) {
-                    $this->session->set_flashdata("match_error", "New Password & Confirm Password Does Not Match.");
                     redirect('login_cont/change_password');
                 } else {
                     $this->session->set_flashdata("error", "Old Password Does Not Match. Try Again");

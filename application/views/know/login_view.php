@@ -15,11 +15,13 @@
                 <span class="db"><img src="<?php echo base_url(); ?>assets/images/logotext.png" alt="logo"/></span>
             </div>
 
-
+            <div class="m-t-25 m-b--5 align-center">
             <?php if (isset($_SESSION['error'])) {
                 echo '<div class="alert alert-danger">' . $this->session->flashdata("error") . '</div>';
             }
             ?>
+            </div>
+
 
             <!-- Form -->
             <?php echo form_open('login_cont/login', 'class="form-horizontal" id="loginform"') ?>

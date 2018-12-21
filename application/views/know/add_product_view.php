@@ -42,13 +42,13 @@
                             <div class="form-group row">
                                 <label for="product_price" class="col-sm-3 text-right control-label col-form-label">Product Price</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="product_price" placeholder="Enter Product Price" required>
+                                    <input type="number" class="form-control" name="product_price" placeholder="Enter Product Price" required">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="image" class="col-sm-3 text-right control-label col-form-label">Upload Image</label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" name="image" required>
+                                    <input type="file" class="form-control" name="image">
                                 </div>
                             </div>
                             <div class="form-group row">

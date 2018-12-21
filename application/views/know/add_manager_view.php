@@ -33,33 +33,34 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-3 text-right control-label col-form-label">Full Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" placeholder="Enter Name" required  >
+                            <input type="text" class="form-control" name="name" placeholder="Enter Name" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="username" class="col-sm-3 text-right control-label col-form-label">Username</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+                            <input type="text" class="form-control" name="username" placeholder="Enter Username" required pattern="^[a-z\d\.]{5,}$" title="Username should only contain lowercase letters. e.g. akshay">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="password" class="col-sm-3 text-right control-label col-form-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
+                            <input type="password" class="form-control" name="password" placeholder="Enter Password" required
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="password" class="col-sm-3 text-right control-label col-form-label">Confirm
-                            Password</label>
+                        <label for="password" class="col-sm-3 text-right control-label col-form-label">Confirm Password</label>
                         <div class="col-sm-9">
-                            <input type="password" class="form-control" name="confirm_password" placeholder="Enter Password" required>
+                            <input type="password" class="form-control" name="confirm_password" placeholder="Enter Password" required
+                                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="email" class="col-sm-3 text-right control-label col-form-label">Email Address</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="email" placeholder="Enter Email Address" required>
+                            <input type="email" class="form-control" name="email" placeholder="Enter Email Address" required >
                         </div>
                     </div>
                     <div class="form-group row">

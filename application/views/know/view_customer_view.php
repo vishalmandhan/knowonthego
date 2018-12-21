@@ -22,13 +22,13 @@
             <table class="table table-striped" id="mydata">
                 <thead>
                 <tr>
-                    <th width="100">Name</th>
+                    <th width="90">Name</th>
                     <th width="90">UserName</th>
                     <th width="70">Email</th>
                     <th width="50">Contact</th>
-                    <th width="50">Status</th>
-                    <th width="90">App ID</th>
-                    <th width="90">Date</th>
+                    <th width="40">Status</th>
+                    <th width="80">App ID</th>
+                    <th width="80">Date</th>
                     <th style="text-align: right;">Actions</th>
                 </tr>
                 </thead>
@@ -121,11 +121,9 @@
 
 <script type="text/javascript">
 
-
     $(document).ready(function(){
         //call function show all customers
         show_customers();
-
 
         //function show all customers
         function show_customers(){

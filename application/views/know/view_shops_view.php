@@ -23,12 +23,12 @@
                 <thead>
                 <tr>
                     <th width="110">Name</th>
-                    <th width="220">Address</th>
-                    <th width="90">Country</th>
+                    <th width="210">Address</th>
+                    <th width="80">Country</th>
                     <th width="50">City</th>
 <!--                    <th width="220">Location</th>-->
                     <th width="50">Status</th>
-                    <th width="120">Users</th>
+                    <th width="100">Users</th>
                     <th style="text-align: right;">Actions</th>
                 </tr>
                 </thead>
