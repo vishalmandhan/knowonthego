@@ -36,13 +36,13 @@
                             <div class="form-group row">
                                 <label for="startDate" class="col-sm-3 text-right control-label col-form-label">Start Date</label>
                                 <div class="col-sm-9">
-                                    <input type="Date" class="form-control" name="startDate" value="MM/DD/yyyy" required>
+                                    <input type="Date" class="form-control" min="<?php echo date('Y-m-d');?>" name="startDate" value="MM/DD/yyyy" required>
                                 </div>
                             </div>
                            <div class="form-group row">
                                 <label for="endDate" class="col-sm-3 text-right control-label col-form-label">End Date</label>
                                 <div class="col-sm-9">
-                                    <input type="Date" class="form-control" name="endDate" value="MM/DD/yyyy" required>
+                                    <input type="date" class="form-control" min="<?php echo date('Y-m-d');?>" name="endDate" id="date" value="MM/DD/yyyy" required >
                                 </div>
                             </div>
                                <div class="form-group row">
@@ -111,4 +111,5 @@
 
         });
     }
+
 </script>

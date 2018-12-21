@@ -11,7 +11,6 @@ class login_cont extends CI_Controller
         $this->load->model('changePass_model');
         $this->load->model('forgotPass_model');
 
-
     }
 
     /*   ==============================================================
@@ -19,7 +18,6 @@ class login_cont extends CI_Controller
             ============================================================== */
     public function login()
     {
-
         if ($_POST) {
             $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
             $this->form_validation->set_rules('password', 'Password', 'trim|required');
@@ -83,7 +81,6 @@ class login_cont extends CI_Controller
     public function forgotPassword()
     {
         $this->load->view('know/Forgot_password');
-
     }
 
     public function resetPassword()
@@ -117,13 +114,11 @@ class login_cont extends CI_Controller
         }
     }
 
-
     /*   ==============================================================
            CHANGE PASSWORD
         ============================================================== */
     public function change_Password()
     {
-
         if ($_POST) {
             // password field with confirmation field matching
             $this->form_validation->set_rules('old_password', 'Password', 'required');

@@ -21,7 +21,7 @@ class product_cont extends CI_Controller {
             $this->form_validation->set_rules('product_name', 'Product Name', 'trim|required|min_length[3]');
             $this->form_validation->set_rules('product_description', 'Description', 'trim|required|min_length[3]');
             $this->form_validation->set_rules('product_price', 'Price', 'trim|required');
-            $this->form_validation->set_rules('product_image', 'Image' , 'trim|required');
+            $this->form_validation->set_rules('product_image', 'Image');
             $this->form_validation->set_rules('product_shop', 'Shop', 'trim|required');
 
             $product_id_new = 0;
@@ -39,7 +39,6 @@ class product_cont extends CI_Controller {
                 );
 
                 $product_id_new = $this->product_model->insert_product($product_data);
-
             }
 
             $filename = 'product_'.$product_id_new;
@@ -65,9 +64,6 @@ class product_cont extends CI_Controller {
             } else {
                 $data['db_success'] = "Record Insert Successfully";
             }
-
-
-
         }
         $user_session['session_data'] = $this->session->userdata('user_login_data');
         $this->load->view('includes/dashboard_header', $user_session);
@@ -135,7 +131,6 @@ class product_cont extends CI_Controller {
 
         echo json_encode($data);
     }
-
 
     public function shop_list(){
         $data = $this->shop_model->shop_list();

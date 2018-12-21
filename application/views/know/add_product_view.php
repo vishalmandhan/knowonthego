@@ -48,7 +48,7 @@
                             <div class="form-group row">
                                 <label for="image" class="col-sm-3 text-right control-label col-form-label">Upload Image</label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" name="image">
+                                    <input type="file" class="form-control" name="image" required>
                                 </div>
                             </div>
                             <div class="form-group row">
