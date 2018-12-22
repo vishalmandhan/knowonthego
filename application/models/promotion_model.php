@@ -23,12 +23,13 @@ class promotion_model extends CI_Model
             $result = $this->db->insert('promotion');
             if ($result) {
                 $id = $this->db->insert_id();
+                return $id;
             } else {
                 throw new Exception("Log database error");
             }
         } catch (Exception $e) {
             log_message('error', $e->getMessage());
-            return;
+            return fasle;
         }
         return false;
     }
