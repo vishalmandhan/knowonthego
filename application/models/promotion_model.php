@@ -22,8 +22,7 @@ class promotion_model extends CI_Model
             $this->db->set($promotion_data);
             $result = $this->db->insert('promotion');
             if ($result) {
-                $id = $this->db->insert_id();
-                return $id;
+                return $this->db->insert_id();
             } else {
                 throw new Exception("Log database error");
             }
