@@ -22,7 +22,6 @@
             ?>
             </div>
 
-
             <!-- Form -->
             <?php echo form_open('login_cont/login', 'class="form-horizontal" id="loginform"') ?>
             <!--            <form class="form-horizontal m-t-20" id="loginform" method="post" action="-->

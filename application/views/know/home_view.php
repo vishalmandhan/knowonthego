@@ -526,7 +526,7 @@
                                 <div class="col-md-4 col-sm-4 col-xs-12 photo">
                                     <div class="single-awesome-project">
                                         <div class="awesome-img">
-                                            <a href="#"><img src="assets/img/portfolio/2.jpg" alt="" /></a>
+                                            <a href="#"><img src="<?php echo base_url();?>assets/img/portfolio/2.jpg" alt="" /></a>
                                             <div class="add-actions text-center">
                                                 <div class="project-dec">
                                                     <a class="venobox" data-gall="myGallery" href="<?php echo base_url();?>assets/img/portfolio/2.jpg">
@@ -853,9 +853,8 @@
                                 <!-- Start  contact -->
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form contact-form">
-                                        <div id="sendmessage">Your message has been sent. Thank you!</div>
-                                        <div id="errormessage"></div>
-                                        <form action="" method="post" role="form" class="contactForm">
+<!--                                        <form action="" method="post" role="form" class="feedback">-->
+                                        <?php echo form_open('home_cont/feedback', 'class="form-horizontal" id="Feedbackform"') ?>
                                             <div class="form-group">
                                                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                                                 <div class="validation"></div>
@@ -872,8 +871,9 @@
                                                 <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                                                 <div class="validation"></div>
                                             </div>
-                                            <div class="text-center"><button type="submit">Send Message</button></div>
-                                        </form>
+                                            <div class="text-center"><button type="submit" name="sndmessage">Send Message</button></div>
+<!--                                        </form>-->
+                                        <?php echo form_close(); ?>
                                     </div>
                                 </div>
                                 <!-- End Left contact -->

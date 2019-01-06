@@ -195,7 +195,7 @@
             var product_description  = $(this).data('product_description');
             var product_price        = $(this).data('product_price');
             var product_image        = $(this).data('product_image');
-            var shop_id            = $(this).data('shop_id');
+            var shop_id              = $(this).data('shop_id');
 
             show_shops(shop_id);
 

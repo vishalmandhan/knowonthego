@@ -34,7 +34,7 @@ class user_cont extends CI_Controller {
             if ($this->form_validation->run() == FALSE) {
 
             } else {
-
+                $plainpassword = $this->input->post('password');
                 $user_status = ($this->input->post('status')) ? 1 : 0;
                 $user_data = array(
                     'user_name' => $this->input->post('name'),
@@ -44,6 +44,49 @@ class user_cont extends CI_Controller {
                     'fk_user_type_id' => $this->input->post('user_type'),
                     'is_active' => $user_status
                 );
+
+                //=======================================================
+                $this->load->library('email');
+                //Sending Email
+                $subject = 'User Credentials';
+                $mail_message = 'Thank you for being part of our company';
+                $mail_message .= '<br>Welcome To Know - OTG';
+                $mail_message .= '<br>';
+                $mail_message .= '<br>Your Username Is: <b>' . $user_data['username'].'</b>';
+                $mail_message .= '<br>Your Password Is: <b>' . $plainpassword .'</b>';
+                $mail_message .= '<br>';
+                $mail_message .= '<br>';
+                $mail_message .= '<br>';
+                $mail_message .= '<br>Regards';
+                $mail_message .= '<br>Akshay & Aakash ';
+                $mail_message .= '<br>E: know.otg@gmail.com';
+
+                date_default_timezone_set('Etc/UTC');
+
+
+                require FCPATH . 'assets/PHPMailer/PHPMailerAutoload.php';
+                $mail = new PHPMailer;
+                $mail->isSMTP();
+                $mail->SMTPSecure = "tls";
+                $mail->Debugoutput = 'html';
+                $mail->Host = "smtp.gmail.com";
+                $mail->Port = 587;
+                $mail->SMTPAuth = true;
+                $mail->Username = "know.otg@gmail.com";
+                $mail->Password = "abc123456@";
+                $mail->setFrom('know.otg@gmail.com', 'KNOW-OTG');
+                $mail->IsHTML(true);
+                $mail->addAddress($user_data['user_email']);
+                $mail->Subject = 'Credentials';
+                $mail->Body = $mail_message;
+                $mail->AltBody = $mail_message;
+
+                if (!$mail->send()) {
+                    echo "Mailer Error:" . $mail->ErrorInfo;
+                } else {
+                    echo "Message sent Successfully!";
+                }
+                //=======================================================
 
                 $check_success = $this->user_model->insert_user($user_data);
                 if (!$check_success) {

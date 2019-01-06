@@ -18,12 +18,9 @@ class forgotPass_model extends CI_Model
         return $query->row();
     }
 
-
     public function sendPassword($email)
     {
-
         $this->load->library('email');
-        //$query = $this->db->query("SELECT password from users where user_email = '" . $email . "' ");
 
         $this->db->select('password');
         $this->db->from('users');
@@ -33,33 +30,34 @@ class forgotPass_model extends CI_Model
         $row = $query->result_array();
         if ($query->num_rows() > 0) {
             $passwordplain = "";
-            $passwordplain = md5(rand(100000, 10000000));
-            $newpass['password'] = ($passwordplain);
+            $passwordplain = (rand(100000, 10000000));
+            $newpass['password'] = md5($passwordplain);
             $this->db->where('user_email', $email);
             $this->db->update('users', $newpass);
 
             //Sending Email
             $subject = 'Password Reset';
-            $mail_message = 'Thanks and ,<br> Your New <b>Password</b> is <b>' . $passwordplain . '</b>' . "\r\n";
+            $mail_message = 'Your New Password Is: <b>' . $passwordplain . '</b>' . "\r\n";
             $mail_message .= '<br>Please Update your password.';
-            $mail_message .= '<br>Thanks & Regards';
-            $mail_message .= '<br> KNOW - OTG ';
+            $mail_message .= '<br>';
+            $mail_message .= '<br>';
+            $mail_message .= '<br>';
+            $mail_message .= '<br>Regards';
+            $mail_message .= '<br>Akshay & Aakash ';
+            $mail_message .= '<br>E: know.otg@gmail.com';
 
             date_default_timezone_set('Etc/UTC');
-
 
             require FCPATH . 'assets/PHPMailer/PHPMailerAutoload.php';
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->SMTPSecure = "tls";
             $mail->Debugoutput = 'html';
-            $mail->Host = "ssl://smtp.googlemail.com";
-            $mail->Host = "ssl://smtp.gmail.com";
             $mail->Host = "smtp.gmail.com";
             $mail->Port = 587;
             $mail->SMTPAuth = true;
             $mail->Username = "know.otg@gmail.com";
-            $mail->Password = "szabist123";
+            $mail->Password = "abc123456@";
             $mail->setFrom('know.otg@gmail.com', 'KNOW-OTG');
             $mail->IsHTML(true);
             $mail->addAddress($email);
