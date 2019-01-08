@@ -819,7 +819,7 @@
                                         <div class="single-icon">
                                             <i class="fa fa-envelope-o"></i>
                                             <p>
-                                                Email: KNOW_OTG@gmail.com<br>
+                                                Email: KNOW.OTG@gmail.com<br>
                                                 <span>Web: www.knowOTG.com</span>
                                             </p>
                                         </div>
@@ -853,7 +853,6 @@
                                 <!-- Start  contact -->
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form contact-form">
-<!--                                        <form action="" method="post" role="form" class="feedback">-->
                                         <?php echo form_open('home_cont/feedback', 'class="form-horizontal" id="Feedbackform"') ?>
                                             <div class="form-group">
                                                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
@@ -872,7 +871,6 @@
                                                 <div class="validation"></div>
                                             </div>
                                             <div class="text-center"><button type="submit" name="sndmessage">Send Message</button></div>
-<!--                                        </form>-->
                                         <?php echo form_close(); ?>
                                     </div>
                                 </div>
@@ -882,6 +880,4 @@
                     </div>
                 </div>
                 <!-- End Contact Area -->
-
-                <!-- Start Footer bottom Area -->
 

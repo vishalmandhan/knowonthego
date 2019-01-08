@@ -26,7 +26,7 @@
                                             </p>
                                             <div class="footer-contacts">
                                                 <p><span>Tel:</span> +92334-2156788</p>
-                                                <p><span>Email:</span> KNOW_OTG@gmail.com</p>
+                                                <p><span>Email:</span> KNOW.OTG@gmail.com</p>
                                                 <p><span>Working Hours:</span> 9am-5pm</p>
                                             </div>
                                         </div>
@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="credits">
 
-                                        Designed by <b style="font-family: 'Comic Sans MS'">Aakash & Akshay.</b>
+                                        Designed by <b style="font-family: 'Comic Sans MS'">Akshay & Aakash.</b>
                                     </div>
                                 </div>
                             </div>
