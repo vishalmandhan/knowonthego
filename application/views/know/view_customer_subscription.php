@@ -68,7 +68,6 @@
 
 <script type="text/javascript">
 
-
     $(document).ready(function(){
         //call function show all customer Subscription
         show_subscription();

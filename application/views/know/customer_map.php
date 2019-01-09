@@ -1,4 +1,5 @@
 
+
     <?php echo $map['js']; ?>
 
     <div class="container-fluid">
