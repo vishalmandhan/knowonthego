@@ -58,7 +58,7 @@ class user_cont extends CI_Controller {
                 $mail_message .= '<br>';
                 $mail_message .= '<br>';
                 $mail_message .= '<br>Regards';
-                $mail_message .= '<br>Akshay & Aakash ';
+                $mail_message .= '<br>Aakash & Akshay ';
                 $mail_message .= '<br>E: know.otg@gmail.com';
 
                 date_default_timezone_set('Etc/UTC');

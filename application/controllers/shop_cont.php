@@ -127,7 +127,8 @@ class shop_cont extends CI_Controller {
 
         if(empty($shop_id)){ return false ;}
 
-        $data=$this->shop_model->delete_shop($shop_id);
+            $data=$this->shop_model->delete_shop($shop_id);
+
         echo json_encode($data);
     }
 

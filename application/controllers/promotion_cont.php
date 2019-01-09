@@ -21,21 +21,40 @@ class promotion_cont extends CI_Controller {
             $this->form_validation->set_rules('promotion_description', 'Promotion Description', 'trim|required|min_length[3]');
             $this->form_validation->set_rules('startDate', 'StartDate', 'trim|required');
             $this->form_validation->set_rules('endDate', 'endDate', 'trim|required');
-            $this->form_validation->set_rules('promotion_product', 'Products', 'required');
+            $this->form_validation->set_rules('promotion_product', 'Products');
 
             // insert product into DB
             if ($this->form_validation->run() == FALSE) {
                 // errors if form issues
             } else {
+//                $productID = $this->input->post('promotion_product');
 
                 $promotion_status = ($this->input->post('status')) ? 1 : 0;
-                $promotion_data = array(
+                $promotion_data = array();
+//                if(empty($productID)) {
+//                    $promotion_data = array(
+//                        'promotion_description' => $this->input->post('promotion_description'),
+//                        'startDate' => $this->input->post('startDate'),
+//                        'endDate' => $this->input->post('endDate'),
+//                        'status' => $promotion_status
+                     $promotion_data = array(
                     'promotion_description' => $this->input->post('promotion_description'),
                     'startDate' => $this->input->post('startDate'),
                     'endDate' => $this->input->post('endDate'),
-                    'fk_product_id' => $this->input->post('promotion_product'),
+//                    'fk_product_id' => $productID,
+                   'fk_product_id' => $this->input->post('promotion_product'),
                     'status' => $promotion_status
                 );
+//                } else {
+//                    $promotion_data = array(
+//                        'promotion_description' => $this->input->post('promotion_description'),
+//                        'startDate' => $this->input->post('startDate'),
+//                        'endDate' => $this->input->post('endDate'),
+//                        'fk_product_id' => $productID,
+//                        'status' => $promotion_status
+//                    );
+//                }
+
 
                 $check_success = $this->promotion_model->insert_promotion($promotion_data);
                 if ($check_success) {

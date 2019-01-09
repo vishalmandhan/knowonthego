@@ -32,11 +32,12 @@ class shop_model extends CI_Model {
 
     public function get_users()
     {
-            $this->db->select('user_id , user_name');
-            $this->db->from('users');
-            $query = $this->db->get();
+        $this->db->select('user_id , username');
+        $this->db->from('users');
+        $this->db->where('fk_user_type_id != 1');
+        $query = $this->db->get();
 
-            return $query->result_array();
+        return $query->result_array();
     }
 
     public function insert_shop($user_data)
@@ -153,8 +154,16 @@ class shop_model extends CI_Model {
 
     function delete_shop($shop_id)
     {
+        $query = $this->db->get('product');
+            if ($query->num_rows() > 0)
+            {
+                return array('message'=>'This shop has product','success'=>false);
+            }
+
         $this->db->where('shop_id', $shop_id);
+
         $result = $this->db->delete('shop');
+
         return $result;
     }
 

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/views/css/dataTables.bootstrap4.css'?>">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <!-- Page Heading -->
     <div class="row">
         <div class="col-12">
@@ -260,7 +260,7 @@
                 dataType : "JSON",
                 data : {product_id:product_id},
                 success: function(data){
-
+                    if(typeof data.message !== "undefined") { alert(data.message) };
                     $('[name="product_id_delete"]').val("");
                     $('#model_delete').modal('hide');
                     show_product();

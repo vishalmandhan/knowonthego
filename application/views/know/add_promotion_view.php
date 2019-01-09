@@ -36,13 +36,13 @@
                             <div class="form-group row">
                                 <label for="startDate" class="col-sm-3 text-right control-label col-form-label">Start Date</label>
                                 <div class="col-sm-9">
-                                    <input type="Date" class="form-control" min="<?php echo date('Y-m-d');?>" name="startDate" value="MM/DD/yyyy" required>
+                                    <input type="Date" class="form-control" min="<?php echo date('Y-m-d');?>" name="startDate" id="startDate" value="DD/MM/YYYY" required>
                                 </div>
                             </div>
                            <div class="form-group row">
                                 <label for="endDate" class="col-sm-3 text-right control-label col-form-label">End Date</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" min="<?php echo date('Y-m-d');?>" name="endDate" id="date" value="MM/DD/yyyy" required >
+                                    <input type="date" class="form-control" min="<?php echo date('Y-m-d');?>" name="endDate" id="endDate" value="DD/MM/YYYY" required >
                                 </div>
                             </div>
                                <div class="form-group row">
@@ -84,6 +84,21 @@
 <!-- End Container fluid  -->
 <!-- ============================================================== -->
 <script type="text/javascript">
+
+    // Start and End Date Type Checking
+    var start = document.getElementById('startDate');
+    var end = document.getElementById('endDate');
+
+    start.addEventListener('change', function() {
+        if (start.value)
+            end.min = start.value;
+    }, false);
+    end.addEventListener('change', function() {
+        if (end.value)
+            start.max = end.value;
+    }, false);
+
+
     $("#shop_select_box").on('change',function(){
     var shop_id = $(this).val();
     show_shops_products(shop_id);
@@ -97,7 +112,7 @@
             data: {shop_id:shop_id},
             dataType : 'json',
             success : function(data){
-                var html = '<select name="promotion_product" class="form-control" required>';
+                var html = '<select name="promotion_product" class="form-control">';
                 for (var i = 0; i < data.length; i++) {
                     html += '<option value="'+data[i].product_id+'">' + data[i].product_name + '</option>';
                 }

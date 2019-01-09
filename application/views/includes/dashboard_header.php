@@ -228,7 +228,7 @@
                     <?php if ($session_data['is_admin']) { ?>
                         <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                                     href="javascript:void(0)" aria-expanded="false"><i
-                                        class="mdi mdi-account-circle"></i><span class="hide-menu">Shop User </span></a>
+                                        class="mdi mdi-account-circle"></i><span class="hide-menu"> User Account </span></a>
 
                             <ul aria-expanded="false" class="collapse  first-level">
                                 <li class="sidebar-item"><a href="<?php echo site_url(); ?>/user_cont/add_manager"

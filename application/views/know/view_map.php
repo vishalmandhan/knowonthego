@@ -8,6 +8,7 @@
                     <h4 class="card-title">View Shops Location</h4>
                     <?php echo $map['html']; ?>
                 </div>
+
             </div>
         </div>
     </div>

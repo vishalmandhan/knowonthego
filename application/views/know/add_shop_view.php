@@ -73,7 +73,7 @@
                             <select name="shop_users" class="form-control" required>
                                 <option value="">Select User</option>
                                 <?php foreach ($users as $user) { ?>
-                                    <option value="<?= $user['user_id'] ?>"><?= $user['user_name'] ?></option>
+                                    <option value="<?= $user['user_id'] ?>"><?= $user['username'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>

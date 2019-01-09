@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/views/css/dataTables.bootstrap4.css'?>">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <!-- Page Heading -->
     <div class="row">
         <div class="col-12">

@@ -10,6 +10,7 @@ class product_model extends CI_Model {
 
     function __construct(){
         parent::__construct();
+
     }
 
     function insert_product ($product_data) {
@@ -80,6 +81,13 @@ class product_model extends CI_Model {
     }
 
     function delete_product($product_id){
+
+         $query = $this->db->get('promotion');
+
+             if ($query->num_rows() > 0)
+             {
+                return array('message'=>'This product has promotion','success'=>false);
+             }
 
         $this->db->where('product_id', $product_id);
         $result=$this->db->delete('product');

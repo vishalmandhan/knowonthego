@@ -23,7 +23,7 @@
                 <?php echo form_open('user_cont/add_manager', 'class="form-horizontal"') ?>
                 <!-- <form class="form-horizontal" method="post"> -->
                 <div class="card-body">
-                    <h4 class="card-title">Add Shop Manager</h4>
+                    <h4 class="card-title">Create User Account</h4>
                     <div class="form-group row">
 <!--                        <label for="name" class="col-sm-3 text-right control-label col-form-label">Id</label>-->
                         <div class="col-sm-9">
