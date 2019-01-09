@@ -31,7 +31,7 @@
 
             <!-- Form -->
             <?php echo form_open('login_cont/resetPassword', 'class="form-horizontal" ') ?>
-            <!--                    <form class="col-12" method="post">-->
+
             <!-- email -->
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -57,7 +57,6 @@
             </div>
             <?php echo form_close(); ?>
 
-            <!--                        </form>-->
         </div>
 
         <!-- ============================================================== -->

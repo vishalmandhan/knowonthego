@@ -874,10 +874,12 @@
                                         <?php echo form_close(); ?>
                                     </div>
                                 </div>
+
                                 <!-- End Left contact -->
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- End Contact Area -->
 
+                <!-- End Contact Area -->

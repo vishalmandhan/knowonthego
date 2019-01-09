@@ -98,7 +98,6 @@
             start.max = end.value;
     }, false);
 
-
     $("#shop_select_box").on('change',function(){
     var shop_id = $(this).val();
     show_shops_products(shop_id);

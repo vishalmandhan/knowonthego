@@ -40,6 +40,7 @@
 </div>
 
 <!-- MODAL EDIT -->
+
 <form action="<?php echo site_url('product_cont/product_update')?>" enctype="multipart/form-data" method="post" id="form">
     <div class="modal fade" id="model_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -126,7 +127,6 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/views/js/dataTables.bootstrap4.js'?>"></script>
 
 <script type="text/javascript">
-
 
     $(document).ready(function(){
          //call function show all product

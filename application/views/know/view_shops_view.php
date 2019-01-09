@@ -136,7 +136,6 @@
 
 <script type="text/javascript">
 
-
     $(document).ready(function(){
         //call function show all product
         show_shops();

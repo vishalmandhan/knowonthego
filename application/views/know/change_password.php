@@ -34,7 +34,7 @@
 
             <!-- Form -->
             <?php echo form_open('login_cont/change_password', 'class="form-horizontal"') ?>
-            <!--            <form class="form-horizontal m-t-20" method="post">-->
+
             <div class="row p-b-30">
                 <div class="col-12">
                     <div class="input-group mb-4">
@@ -84,7 +84,7 @@
                     </div>
                 </div>
             </div>
-            <!--            </form>-->
+
             <?php echo form_close(); ?>
 
 

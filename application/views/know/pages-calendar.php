@@ -39,6 +39,7 @@
             </div>
         </div>
     </div>
+
     <!-- BEGIN MODAL -->
     <div class="modal none-border" id="my-event">
         <div class="modal-dialog">

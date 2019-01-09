@@ -42,6 +42,7 @@
 </div>
 
 <!-- MODAL EDIT -->
+
 <form>
     <div class="modal fade" id="model_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">

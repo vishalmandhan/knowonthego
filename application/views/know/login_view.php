@@ -24,8 +24,6 @@
 
             <!-- Form -->
             <?php echo form_open('login_cont/login', 'class="form-horizontal" id="loginform"') ?>
-            <!--            <form class="form-horizontal m-t-20" id="loginform" method="post" action="-->
-            <?php //echo site_url(); ?><!--/login_cont/login_validation">-->
 
             <div class="row p-b-30">
                 <div class="col-12">
@@ -66,7 +64,7 @@
                 </div>
             </div>
             <?php echo form_close(); ?>
-            <!--            </form>-->
+
         </div>
 
         <!-- ============================================================== -->
