@@ -145,7 +145,7 @@
                     var i;
                     for (i = 0; i < data.length; i++) {
                         var selected = "";
-                        if(data[i].shop_id == selected_shop_id) {
+                        if(data[i]. shop_id== selected_shop_id) {
                             selected = "selected";
                         }
                         html += '<option value="'+data[i].shop_id+'" '+selected+'>' + data[i].shop_name + '</option>';

@@ -22,8 +22,8 @@
             <table class="table table-striped" id="mydata">
                 <thead>
                 <tr>
-                    <th width="110">Name</th>
-                    <th width="210">Address</th>
+                    <th width="90">Name</th>
+                    <th width="230">Address</th>
                     <th width="80">Country</th>
                     <th width="50">City</th>
 <!--                    <th width="220">Location</th>-->
@@ -68,8 +68,8 @@
                     </div>
                     <div class="form-group row">
                         <label for="select country" class="col-md-2 col-form-label">Country</label>
-                        <div class="col-sm-10" id="country_list_dropdown">
-                        </div>
+                    <div class="col-sm-10" id="country_list_dropdown">
+                    </div>
                     </div>
                     <div class="form-group row">
                         <label for="select city" class="col-md-2 col-form-label">Select City</label>

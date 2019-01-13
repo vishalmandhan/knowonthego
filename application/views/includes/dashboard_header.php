@@ -289,7 +289,7 @@
                                             class="hide-menu"> View Promotion </span></a></li>
                         </ul>
                     </li>
-                    <?php if ($session_data['is_admin']) { ?>
+<!--                    --><?php //if ($session_data['is_admin']) { ?>
                     <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark"
                                                 href="javascript:void(0)" aria-expanded="false"><i
                                     class="mdi mdi-map-marker"></i><span class="hide-menu"> Shop Location </span></a>
@@ -301,7 +301,7 @@
                             </li>
                         </ul>
                     </li>
-                    <?php } ?>
+<!--                    --><?php //} ?>
 
                     <?php if ($session_data['is_admin']) { ?>
                     <li class="sidebar-item"><a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i

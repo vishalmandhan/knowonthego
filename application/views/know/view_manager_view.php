@@ -144,6 +144,7 @@
                             '<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-user_id="'+data[i].user_id+'">Delete</a>'+
                             '</td>'+
                             '</tr>';
+
                     }
                     $('#show_data').html(html);
                     $('#mydata').dataTable();

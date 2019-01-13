@@ -137,7 +137,7 @@ class shop_model extends CI_Model {
         return $query->result_array();
     }
 
-    function update_shop($shop_id, $shop_name, $shop_address, $city_id, $country_id, $map_location, $is_active){
+    function update_shop($shop_id, $shop_name, $shop_address, $country_id, $city_id, $map_location, $is_active){
 
         $this->db->set('shop_id', $shop_id);
         $this->db->set('shop_name', $shop_name);

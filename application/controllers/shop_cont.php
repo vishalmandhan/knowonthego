@@ -200,8 +200,11 @@ class shop_cont extends CI_Controller {
         $city_id = $this->input->post('city_id_fk');
         $map_location = $this->input->post('map_location');
         $is_active = $this->input->post('status');
+        if(empty($is_active)) {
+            $is_active = 0;
+        }
 
-        if(empty($shop_id) || empty($shop_name) || empty($shop_address) || empty($country_id) || empty($city_id) || empty($map_location) || empty($is_active))  {
+        if(empty($shop_id) || empty($shop_name) || empty($shop_address) || empty($country_id) || empty($city_id) || empty($map_location))  {
             return false;
         }
 

@@ -12,9 +12,10 @@ class user_cont extends CI_Controller {
 
     }
 
-    /*   ==============================================================
+    /*  ==============================================================
            ADD MANAGER
         ============================================================== */
+
     public function add_manager()
     {
         if (isset($_SESSION['user_login_data']) && !$_SESSION['user_login_data']['is_admin']) {
@@ -62,7 +63,6 @@ class user_cont extends CI_Controller {
                 $mail_message .= '<br>E: know.otg@gmail.com';
 
                 date_default_timezone_set('Etc/UTC');
-
 
                 require FCPATH . 'assets/PHPMailer/PHPMailerAutoload.php';
                 $mail = new PHPMailer;
@@ -122,7 +122,6 @@ class user_cont extends CI_Controller {
         $data = $this->user_model->user_list();
         echo json_encode($data);
     }
-
 
     public function user_update(){
 
