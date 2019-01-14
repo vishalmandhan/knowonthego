@@ -64,19 +64,19 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Start Date</label>
                         <div class="col-md-10">
-                            <input type="date" name="promotion_startDate_edit" id="promotion_startDate_edit" class="form-control" placeholder="YY-MM-DD">
+                            <input type="date" name="promotion_startDate_edit" id="promotion_startDate_edit" class="form-control" placeholder="YY-MM-DD" min="<?php echo date('Y-m-d');?>">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">End Date</label>
                         <div class="col-md-10">
-                            <input type="date" name="promotion_endDate_edit" id="promotion_endDate_edit" class="form-control" placeholder="YY-MM-DD">
+                            <input type="date" name="promotion_endDate_edit" id="promotion_endDate_edit" class="form-control" placeholder="YY-MM-DD" min="<?php echo date('Y-m-d');?>">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Status</label>
                         <div class="col-md-1">
-                            <input type="checkbox" name="promotion_status_edit" id="promotion_status_edit" class="form-control">
+                            <input type="checkbox" name="promotion_status_edit" id="promotion_status_edit"  class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -131,6 +131,19 @@
 <script type="text/javascript" src="<?php echo base_url().'assets/views/js/dataTables.bootstrap4.js'?>"></script>
 
 <script type="text/javascript">
+
+    // Start and End Date Type Checking
+    var start = document.getElementById('promotion_startDate_edit');
+    var end = document.getElementById('promotion_endDate_edit');
+
+    start.addEventListener('change', function() {
+        if (start.value)
+            end.min = start.value;
+    }, false);
+    end.addEventListener('change', function() {
+        if (end.value)
+            start.max = end.value;
+    }, false);
 
     $(document).ready(function(){
         //call function show all product

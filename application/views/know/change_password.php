@@ -52,8 +52,7 @@
                         </div>
                         <input type="Password" class="form-control form-control-lg" placeholder=" New Password"
                                aria-label="Password" aria-describedby="basic-addon1" name="new_password"
-                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-                        required>
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                     </div>
                     <div class="input-group mb-4">
                         <div class="input-group-prepend">
@@ -62,9 +61,7 @@
                         </div>
                         <input type="Password" class="form-control form-control-lg" placeholder=" Confirm Password"
                                aria-label="Password" aria-describedby="basic-addon1" name="confirm_password"
-                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-
-                        required>
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                     </div>
                 </div>
             </div>
