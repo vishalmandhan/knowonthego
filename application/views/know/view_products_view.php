@@ -141,11 +141,11 @@
                 dataType : 'json',
                 success : function(data){
 
-                    var html = '<select name="shop_name"  class="form-control">';
+                    var html = '<select name="shop_name" id="shop_select_box"  class="form-control">';
                     var i;
                     for (i = 0; i < data.length; i++) {
                         var selected = "";
-                        if(data[i]. shop_id== selected_shop_id) {
+                        if(data[i].shop_id == selected_shop_id) {
                             selected = "selected";
                         }
                         html += '<option value="'+data[i].shop_id+'" '+selected+'>' + data[i].shop_name + '</option>';
@@ -170,13 +170,13 @@
                     var i;
                     for(i=0; i<data.length; i++){
                         html += '<tr>'+
-                            '<td><img src="<?php echo base_url() ?>assets/product_images/'+data[i].product_image+'?<?php echo microtime(true);?>" width="70px"/></td>'+
+                            '<td><img src="<?php echo base_url() ?>assets/product_images/'+data[i].product_image+'?'+Math.random()+'" width="70px"/></td>'+
                             '<td>'+data[i].product_name+'</td>'+
                             '<td>'+data[i].product_description+'</td>'+
                             '<td>'+data[i].product_price+'</td>'+
                             '<td>'+data[i].shop_name+'</td>'+
                             '<td style="text-align:right;">'+
-                            '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-product_id="'+data[i].product_id+'" data-product_name="'+data[i].product_name+'" data-product_description="'+data[i].product_description+'" data-product_price="'+data[i].product_price+'" data-product_image="'+data[i].product_image+'" data-shop_id="'+data[i].shop_id+'">Edit</a>'+' '+
+                            '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-product_id="'+data[i].product_id+'" data-product_name="'+data[i].product_name+'" data-product_description="'+data[i].product_description+'" data-product_price="'+data[i].product_price+'"  data-shop_id="'+data[i].shop_id+'" data-product_image="'+data[i].product_image+'">Edit</a>'+' '+
                             '<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-product_id="'+data[i].product_id+'">Delete</a>'+
                             '</td>'+
                             '</tr>';
@@ -199,25 +199,34 @@
 
             show_shops(shop_id);
 
+            // reset
+            $('[name="product_id_edit"]').val("");
+            $('[name="product_name_edit"]').val("");
+            $('[name="product_description_edit"]').val("");
+            $('[name="product_price_edit"]').val("");
+            $('[name="image_name"]').val("");
+            $('[name="product_image"]').val("");
+
+
             $('#model_edit').modal('show');
             $('[name="product_id_edit"]').val(product_id);
             $('[name="product_name_edit"]').val(product_name);
             $('[name="product_description_edit"]').val(product_description);
             $('[name="product_price_edit"]').val(product_price);
             $('[name="image_name"]').val(product_image);
-            $('#product_image').html('<img src="<?php echo base_url() ?>assets/product_images/'+product_image+'" width="70px" />')
+            $('#product_image').html('<img src="<?php echo base_url() ?>assets/product_images/'+product_image+'?'+Math.random()+'" width="70px" />')
 
         });
 
         //update record to database
         $("#form").on('submit',(function(e) {
             e.preventDefault();
-            var product_id           = $('#product_id_edit').val();
+            /*var product_id           = $('#product_id_edit').val();
             var product_name         = $('#product_name_edit').val();
             var product_description  = $('#product_description_edit').val();
             var product_price        = $('#product_price_edit').val();
             var product_image        = $('[name="product_image"]').val();
-            var shop_id_fk           = $('[name="shop_name"]').val();
+            var shop_id_fk           = $('[name="shop_name"]').val();*/
 
             $.ajax({
                 type : "POST",

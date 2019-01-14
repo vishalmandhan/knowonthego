@@ -64,13 +64,13 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Start Date</label>
                         <div class="col-md-10">
-                            <input type="text" name="promotion_startDate_edit" id="promotion_startDate_edit" class="form-control" placeholder="YY-MM-DD">
+                            <input type="date" name="promotion_startDate_edit" id="promotion_startDate_edit" class="form-control" placeholder="YY-MM-DD">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">End Date</label>
                         <div class="col-md-10">
-                            <input type="text" name="promotion_endDate_edit" id="promotion_endDate_edit" class="form-control" placeholder="YY-MM-DD">
+                            <input type="date" name="promotion_endDate_edit" id="promotion_endDate_edit" class="form-control" placeholder="YY-MM-DD">
                         </div>
                     </div>
                     <div class="form-group row">

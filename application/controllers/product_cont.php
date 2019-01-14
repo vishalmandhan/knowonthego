@@ -37,32 +37,29 @@ class product_cont extends CI_Controller {
                     'fk_shop_id' => $this->input->post('product_shop'),
 
                 );
-
                 $product_id_new = $this->product_model->insert_product($product_data);
-            }
 
-            $filename = 'product_'.$product_id_new;
+                $filename = 'product_' . $product_id_new;
 
-            // upload image
-            $config['upload_path']   = 'assets/product_images';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            //$config['max_size']      = '2048';
-            //$config['max_width']     = '1024';
-            //$config['max_height']    = '768';
-            $config['file_name']    = $filename;
+                // upload image
+                $config['upload_path'] = 'assets/product_images';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                //$config['max_size']      = '2048';
+                //$config['max_width']     = '1024';
+                //$config['max_height']    = '768';
+                $config['file_name'] = $filename;
 
-            $this->load->library('upload' , $config);
-            $this->upload->initialize($config);
-            $field_name = "image";
-            if(!$this->upload->do_upload($field_name)) {
-                $upload_error = $this->upload->display_errors();
-            }
-            $data = $this->upload->data();
-            $check_success=$this->product_model->insert_image_path($product_id_new,$filename.$data['file_ext']);
-            if (!$check_success) {
-                $data['db_error'] = "Record already exist/DB error";
-            } else {
-                $data['db_success'] = "Record Insert Successfully";
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                $field_name = "image";
+                if (!$this->upload->do_upload($field_name)) {
+                    $upload_error = $this->upload->display_errors();
+                }
+                $data = $this->upload->data();
+                $check_success = $this->product_model->insert_image_path($product_id_new, $filename . $data['file_ext']);
+                if (!$check_success) {
+                    $data['db_success'] = "Record Insert Successfully";
+                }
             }
         }
         $user_session['session_data'] = $this->session->userdata('user_login_data');
@@ -107,28 +104,35 @@ class product_cont extends CI_Controller {
         $file_path = $abspath."assets/product_images/".$image_name;
 
         $this->load->helper('file');
-        if(file_exists($file_path)){
+        if(file_exists($file_path) && !empty($_FILES['product_image']['name'])){
             unlink($file_path);
         }
 
-        $config['upload_path']   = 'assets/product_images';
-        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $dataupload = "";
+
+        if(!empty($_FILES['product_image']['name'])) {
+
+            $config['upload_path'] = 'assets/product_images';
+            $config['allowed_types'] = 'gif|jpg|png|jpeg';
 //        $config['max_size']      = '100';
 //        $config['max_width']     = '1024';
 //        $config['max_height']    = '768';
-        $config['file_name']    =  $filename;
+            $config['file_name'] = $filename;
 
-        $this->load->library('upload' , $config);
-        $this->upload->initialize($config);
-        $field_name = "product_image";
-        if(!$this->upload->do_upload($field_name)) {
-            $upload_error = $this->upload->display_errors();
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+            $field_name = "product_image";
+            if (!$this->upload->do_upload($field_name)) {
+                $upload_error = $this->upload->display_errors();
+            }
+            $dataupload = $this->upload->data();
         }
-        $data = $this->upload->data();
         //$this->product_model->insert_image_path($product_id,$filename.$data['file_ext']);
         //json_encode($data); exit;
-        $data=$this->product_model->update_product($product_id,$product_name,$product_description,$product_price,$filename.$data['file_ext'],$shop_id);
-
+        $data = $this->product_model->update_product($product_id,$product_name,$product_description,$product_price,$shop_id);
+        if(!empty($_FILES['product_image']['name'])) {
+            $this->product_model->update_product_image($product_id, $filename . $dataupload['file_ext']);
+        }
         echo json_encode($data);
     }
 

@@ -154,14 +154,18 @@ class shop_model extends CI_Model {
 
     function delete_shop($shop_id)
     {
-        $query = $this->db->get('product');
+        $this->db->select('*');
+        $this->db->from('product');
+        $this->db->where('fk_shop_id', $shop_id);
+        $query = $this->db->get();
+
+
             if ($query->num_rows() > 0)
             {
-                return array('message'=>'This shop has product','success'=>false);
+                return array('message'=>'This shop has products','success'=>false);
             }
 
         $this->db->where('shop_id', $shop_id);
-
         $result = $this->db->delete('shop');
 
         return $result;

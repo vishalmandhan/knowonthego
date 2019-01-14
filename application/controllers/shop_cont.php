@@ -121,16 +121,6 @@ class shop_cont extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function shop_delete(){
-
-        $shop_id=$this->input->post('shop_id');
-
-        if(empty($shop_id)){ return false ;}
-
-            $data=$this->shop_model->delete_shop($shop_id);
-
-        echo json_encode($data);
-    }
 
     public function view_shop_location()
     {
@@ -209,6 +199,17 @@ class shop_cont extends CI_Controller {
         }
 
         $data=$this->shop_model->update_shop($shop_id, $shop_name, $shop_address, $country_id, $city_id, $map_location, $is_active);
+        echo json_encode($data);
+    }
+
+    public function shop_delete(){
+
+        $shop_id=$this->input->post('shop_id');
+
+        if(empty($shop_id)){ return false ;}
+
+        $data=$this->shop_model->delete_shop($shop_id);
+
         echo json_encode($data);
     }
 

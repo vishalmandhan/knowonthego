@@ -26,7 +26,6 @@ class product_model extends CI_Model {
             }
         } catch (Exception $e) {
             log_message('error',$e->getMessage());
-            //return;
         }
         return false;
     }
@@ -50,7 +49,7 @@ class product_model extends CI_Model {
             return $query->result();
         }
         $user_id = $_SESSION['user_login_data']['user_id'];
-        $query = $this->db->select('p.*, s.shop_name')
+        $query = $this->db->select('p.*, s.shop_name, s.shop_id')
             ->from('product as p')
             ->join('shop as s', 'p.fk_shop_id = s.shop_id', 'LEFT')
             ->join('users as u', 'u.user_id = s.fk_user_id', 'LEFT')
@@ -67,13 +66,22 @@ class product_model extends CI_Model {
         return $query->result();
     }
 
-    function update_product($product_id,$product_name,$product_description,$product_price,$product_image,$shop_id){
+    function update_product($product_id,$product_name,$product_description,$product_price,$shop_id){
 
         $this->db->set('product_name', $product_name);
         $this->db->set('product_description', $product_description);
         $this->db->set('product_price', $product_price);
-        $this->db->set('product_image', $product_image);
+//        $this->db->set('product_image', $product_image);
         $this->db->set('fk_shop_id', $shop_id);
+
+        $this->db->where('product_id', $product_id);
+        $result=$this->db->update('product');
+        return $result;
+    }
+
+    function update_product_image($product_id,$product_image){
+
+        $this->db->set('product_image', $product_image);
 
         $this->db->where('product_id', $product_id);
         $result=$this->db->update('product');
@@ -82,11 +90,14 @@ class product_model extends CI_Model {
 
     function delete_product($product_id){
 
-         $query = $this->db->get('promotion');
+        $this->db->select('*');
+        $this->db->from('promotion');
+        $this->db->where('fk_product_id', $product_id);
+        $query = $this->db->get();
 
              if ($query->num_rows() > 0)
              {
-                return array('message'=>'This product has promotion','success'=>false);
+                return array('message'=>'This product has promotions','success'=>false);
              }
 
         $this->db->where('product_id', $product_id);
